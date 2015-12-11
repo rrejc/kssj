@@ -1,0 +1,18 @@
+{
+  "name": "kssj",
+  "version": "1.0.0",
+  "description": "Kolokacijski slovar slovenskega jezika",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "ejs": "^2.3.4",
+    "express": "^4.13.3"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  }
+}
