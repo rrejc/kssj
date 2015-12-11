@@ -9,8 +9,8 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "ejs": "^2.3.4",
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "jade": "^1.11.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
