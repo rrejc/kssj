@@ -2,8 +2,8 @@ var express = require('express');
 var path = require('path');
 var app = express();
 
-var index = require('./routes/index');
-var search = require('./routes/search');
+var index = require('./controllers/index');
+var search = require('./controllers/search');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
