@@ -3,4 +3,5 @@ extends layout.jade
 block content
 	include ./partials/search-bar.jade
 	.container
-		p=  q
+		each result in entries
+			p= result.iztocnica
