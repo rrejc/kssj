@@ -1,5 +1,133 @@
+// --------------------------------------------------------------------------------
+// KSSJ variables
+// --------------------------------------------------------------------------------
+// Colors
+$kssj-white:					#ffffff;
+$kssj-gray1:					#f4f4f4;
+$kssj-gray2:					#e8e8e8;
+$kssj-gray3:					#929292;
+$kssj-black:					#212121;
+
+$kssj-blue-base:				#2196f3;
+$kssj-blue1:					#1e86d9;
+$kssj-blue2:					#186fb3;
+$kssj-blue3:					#104773;
+$kssj-blue4:					#072035;
+
+// Fonts - family
+$kssj-font-family:				'Fira Sans', sans-serif;					
+
+// Fonts - md, sm, xs
+$kssj-font-size-base:			14px;
+$kssj-font-size-h1:				22.4px;
+$kssj-font-size-h2:				19.9px;
+$kssj-font-size-h3:				17.7px;
+$kssj-font-size-h4:				15.7px;
+
+$kssj-line-height-base:			24.5px;
+$kssj-line-height-h1:			39.2px;
+$kssj-line-height-h2:			34.8px;
+$kssj-line-height-h3:			30.9px;
+$kssj-line-height-h4:			27.5px;
+
+
+// Fonts - lg
+$kssj-font-size-base-desktop:	16px;
+$kssj-font-size-h1-desktop:		25.6px;
+$kssj-font-size-h2-desktop:		22.7px;
+$kssj-font-size-h3-desktop:		20.3px;
+$kssj-font-size-h4-desktop:		18.0px;
+
+$kssj-line-height-base-desktop:	28.0px;
+$kssj-line-height-h1-desktop:	44.8px;
+$kssj-line-height-h2-desktop:	39.7px;
+$kssj-line-height-h3-desktop:	35.5px;
+$kssj-line-height-h4-desktop:	31.5px;
+
+
+// --------------------------------------------------------------------------------
+// Bootstrap overrides
+// --------------------------------------------------------------------------------
+$brand-primary:					$kssj-blue2;
+$font-family-sans-serif:		$kssj-font-family;
+$font-family-serif:				$kssj-font-family;
+$font-family-base:				$kssj-font-family;
+
+$font-size-base:				$kssj-font-size-base;
+$font-size-h1:					$kssj-font-size-h1;
+$font-size-h2:					$kssj-font-size-h2;
+$font-size-h3:					$kssj-font-size-h3;
+$font-size-h4:					$kssj-font-size-h4;
+
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
+
+// --------------------------------------------------------------------------------
+// KSSJ
+// --------------------------------------------------------------------------------
+// Type
 body {
-	background-color: blue;
+}
+h1 {
+	line-height: $kssj-line-height-h1;
+}
+h2 {
+	line-height: $kssj-line-height-h2;
+}
+h3 {
+	line-height: $kssj-line-height-h3;
+}
+h4 {
+	line-height: $kssj-line-height-h4;
+}
+
+
+@media (min-width: $screen-lg-min) {
+	body {
+		font-size: $kssj-font-size-base-desktop;
+		line-height: $kssj-line-height-base-desktop;
+	}
+	h1 {
+		font-size: $kssj-font-size-h1-desktop;
+		line-height: $kssj-line-height-h1-desktop;
+	}
+	h2 {
+		font-size: $kssj-font-size-h2-desktop;
+		line-height: $kssj-line-height-h2-desktop;
+	}
+	h3 {
+		font-size: $kssj-font-size-h3-desktop;
+		line-height: $kssj-line-height-h3-desktop;
+	}
+	h4 {
+		font-size: $kssj-font-size-h4-desktop;
+		line-height: $kssj-line-height-h4-desktop;
+	}
+}
+
+// Search bar
+.search-bar {
+	@include make-row();	
+	background-color: $kssj-blue-base;
+	padding: 15px 0;
+	
+	.input-form {
+		@include make-sm-column(4);
+		@include make-sm-column-offset(4);
+		
+		input {
+			@extend .form-control;
+			background-color: $kssj-blue-base;
+			border-color: $kssj-white;
+			color: $kssj-white;
+			
+			@include form-control-focus($kssj-white);
+			@include placeholder($kssj-gray2);
+		}
+		
+		button {
+			border-color: $kssj-white;
+			$color: $kssj-white;
+		}
+	}
 }

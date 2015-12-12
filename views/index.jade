@@ -1,4 +1,15 @@
 extends layout.jade
 
 block content
-	<h1>Hello from index</h1> 
+	include ./partials/search-bar.jade
+	.container
+		.row
+			.col-md-4
+				h3 Kolokacijski slovar slovenskega jezika
+				p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec turpis ullamcorper, ultrices nulla eget, molestie lorem. Curabitur sed consectetur urna, in ultrices tellus.
+			.col-md-4
+				h3 100.000 gesel
+				p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec turpis ullamcorper, ultrices nulla eget, molestie lorem. Curabitur sed consectetur urna, in ultrices tellus.
+			.col-md-4
+				h3 Celovit slovar za 21 stoletje
+				p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec turpis ullamcorper, ultrices nulla eget, molestie lorem. Curabitur sed consectetur urna, in ultrices tellus.
