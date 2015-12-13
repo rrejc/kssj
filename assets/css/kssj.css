@@ -5912,4 +5912,31 @@ h4 {
     .search-bar .input-form button {
       border-color: #ffffff; }
 
+.entry {
+  margin-left: -15px;
+  margin-right: -15px; }
+  .entry:before, .entry:after {
+    content: " ";
+    display: table; }
+  .entry:after {
+    clear: both; }
+  .entry .collocators {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px; }
+    @media (min-width: 1200px) {
+      .entry .collocators {
+        float: left;
+        width: 75%; } }
+  .entry .structures {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px; }
+    @media (min-width: 1200px) {
+      .entry .structures {
+        float: left;
+        width: 25%; } }
+
 /*# sourceMappingURL=kssj.css.map */

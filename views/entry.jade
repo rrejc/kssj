@@ -1,0 +1,16 @@
+extends layout.jade
+
+block content
+	include ./partials/search-bar.jade
+	.container
+		.entry
+			.collocators
+				ul.list-group
+					li.list-group-item= Option1
+					li.list-group-item= Option2				
+			.structures
+				ul.list-group
+					li.list-group-item
+						a(href='#') Pridevnik(0) + Samostalnik (1)
+					li.list-group-item
+						a(href='#') Samostalnik(1) + vezni glagol + Pridevnik (1)

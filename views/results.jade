@@ -3,5 +3,7 @@ extends layout.jade
 block content
 	include ./partials/search-bar.jade
 	.container
-		each result in entries
-			p= result.iztocnica
+		ul.list-group
+			each result in entries
+				li.list-group-item
+					a(href='/entry?id=' + result.id_gesla + '&q=' + q)= result.iztocnica
