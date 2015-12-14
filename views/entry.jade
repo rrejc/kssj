@@ -4,16 +4,14 @@ block content
 	include ./partials/search-bar.jade
 	.container
 		.col-lg-12
-				h1= headword
-				h2= pos
+			h1= headword
+			h2= pos
 		.entry
 			.collocators
 				ul.list-group
 					each collocation in collocations
-						li.list-group-item!= collocation.kolokacija
-							ul
-								each example in collocation.examples
-									li!= example
+						li.list-group-item
+							a(href='/entry/collocation?q=' + q + '&id=' + id + '&cid=' + collocation.id_kolokacije)!= collocation.kolokacija
 			.structures
 				ul.nav.nav-pills.nav-stacked
 					each structure in structures

@@ -4,6 +4,7 @@ var pgp = require('pg-promise')();
 var config = require('../config.js');
 var exampleParser = require('../model/exampleParser.js');
 var collocationParser = require('../model/collocationParser.js');
+var structureParser = require('../model/structureParser.js');
 
 router.get('/', function(req,res,next) {
 	var q = req.query.q;
@@ -27,26 +28,48 @@ router.get('/', function(req,res,next) {
 				sid = data[0].id_strukture;
 			}
 			model.structures = data;
+			model.structures.forEach(function(structure) {
+				structure.struktura = structureParser.toString(structure.struktura);
+			});			
 			model.sid = sid;
 			return db.many('SELECT * FROM kssj_kolokacije WHERE id_gesla = ${id} AND id_strukture = ${sid}', {id:id, sid:sid});
 		})
 		.then(function(data) {
 			model.collocations = data;
-			return db.many('SELECT * FROM kssj_zgledi WHERE id_gesla = ${id} AND id_strukture = ${sid}', {id:id, sid:sid});						
-		})
-		.then(function(examples) {
 			model.collocations.forEach(function(collocation) {
 				collocation.kolokacija = collocationParser.toHtml(collocation.kolokacija);
-				collocation.examples = [];
-				examples.forEach(function(example) {
-					if (example.id_kolokacije === collocation.id_kolokacije) {
-						//collocation.examples.push(example2Html(example.zgled));
-						collocation.examples.push(exampleParser.toHtml(example.zgled));
-					}
-				});
 			});
 			res.render('entry', model);
-		});	
+		});
+});
+
+router.get('/collocation', function(req,res,next) {
+	var q = req.query.q;
+	var id = req.query.id;
+	var cid = req.query.cid;
+	
+	var model = {
+		q: q,
+		id: id
+	};
+	
+	var db = pgp(config.connectionString);
+	db.one('SELECT k.*, s.struktura FROM kssj_kolokacije k, kssj_strukture s WHERE k.id_strukture = s.id_strukture AND k.id_kolokacije = ${cid}', {cid:cid})
+		.then(function(data) {
+			model.collocation = collocationParser.toHtml(data.kolokacija);
+			model.structure = structureParser.toString(data.struktura);
+			return db.many('SELECT * FROM kssj_zgledi WHERE id_kolokacije = ${cid}', {cid:cid});
+		})
+		.then(function(data) {
+			model.examples = data;
+			model.examples.forEach(function(example) {
+				example.zgled = exampleParser.toHtml(example.zgled);
+			});
+			res.render('collocation', model);
+		})
+		.catch(function(error) {
+			console.error(error);
+		});
 });
 
 module.exports = router;

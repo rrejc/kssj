@@ -1,0 +1,11 @@
+extends layout.jade
+
+block content
+	include ./partials/search-bar.jade
+	.container
+		.col-lg-12
+			h1!= collocation
+			h2!= structure
+			ul
+				each example in examples
+					li!= example.zgled
