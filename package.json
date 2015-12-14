@@ -11,7 +11,9 @@
   "dependencies": {
     "express": "^4.13.3",
     "jade": "^1.11.0",
-    "pg": "^4.4.3"
+    "pg": "^4.4.3",
+    "pg-promise": "^2.7.3",
+    "sax": "^1.1.4"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

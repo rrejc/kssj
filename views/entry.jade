@@ -2,15 +2,18 @@ extends layout.jade
 
 block content
 	include ./partials/search-bar.jade
+	h1= headword
 	.container
 		.entry
 			.collocators
 				ul.list-group
-					li.list-group-item= Option1
-					li.list-group-item= Option2				
+					each collocation in collocations
+						li.list-group-item!= collocation.kolokacija
+							ul
+								each example in collocation.examples
+									li!= example
 			.structures
-				ul.list-group
-					li.list-group-item
-						a(href='#') Pridevnik(0) + Samostalnik (1)
-					li.list-group-item
-						a(href='#') Samostalnik(1) + vezni glagol + Pridevnik (1)
+				ul.nav.nav-pills.nav-stacked
+					each structure in structures
+						li(class=sid==structure.id_strukture ? 'active':'')
+							a(href='/entry?id=' + id + '&sid=' + structure.id_strukture)= structure.struktura
