@@ -16,9 +16,10 @@ router.get('/', function(req,res,next) {
 	};
 	
 	var db = pgp(config.connectionString);
-	db.one('SELECT * FROM kssj_gesla WHERE id_gesla = ${id}', {id:id})
+	db.one('SELECT g.*, b.bes_vrsta FROM kssj_gesla g, sssj_bes_vrste b WHERE g.id_bes_vrste = b.id_bes_vrste AND id_gesla = ${id}', {id:id})
 		.then(function(data) {
 			model.headword = data.iztocnica;
+			model.pos = data.bes_vrsta;
 			return db.many('SELECT * FROM kssj_strukture WHERE id_gesla = ${id}', {id:id});			
 		})
 		.then(function(data) {
