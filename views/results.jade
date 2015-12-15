@@ -3,7 +3,11 @@ extends layout.jade
 block content
 	include ./partials/search-bar.jade
 	.container
-		ul.list-group
-			each result in entries
-				li.list-group-item
-					a(href='/entry?id=' + result.id_gesla + '&q=' + q)= result.iztocnica
+		h2 Rezultati iskanja
+		if (entries.length === 0)
+			p Vaše iskanje ni obrodilo sadov.
+		else
+			ul.list-group
+				each result in entries
+					li.list-group-item
+						a(href='/entry?id=' + result.id_gesla + '&q=' + q)= result.iztocnica

@@ -5928,7 +5928,7 @@ h4 {
     @media (min-width: 1200px) {
       .entry .collocators {
         float: left;
-        width: 75%; } }
+        width: 66.6666666667%; } }
   .entry .structures {
     position: relative;
     min-height: 1px;
@@ -5937,6 +5937,6 @@ h4 {
     @media (min-width: 1200px) {
       .entry .structures {
         float: left;
-        width: 25%; } }
+        width: 33.3333333333%; } }
 
 /*# sourceMappingURL=kssj.css.map */

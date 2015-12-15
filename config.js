@@ -1,5 +1,5 @@
 var config = {
-	connectionString: 'postgres://ks:ks123@localhost/ks'
+	connectionString: 'postgres://kssj:123kssj321@localhost/kssj'
 }
 
 module.exports = config;

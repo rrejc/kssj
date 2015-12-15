@@ -11,7 +11,7 @@ router.get('/', function(req,res,next) {
 	};
 	
 	var db = pgp(config.connectionString);
-	db.many("SELECT * FROM kssj_gesla WHERE iztocnica LIKE '%${iztocnica^}%'", {iztocnica:model.q})
+	db.any("SELECT * FROM kssj_gesla WHERE iztocnica LIKE '%${iztocnica^}%'", {iztocnica:model.q})
 		.then(function(data) {
 			model.entries = data;
 			res.render('results', model);

@@ -4,8 +4,8 @@ block content
 	include ./partials/search-bar.jade
 	.container
 		.col-lg-12
-			h1= headword
-			h2= pos
+			h2= headword
+			h3= pos
 		.entry
 			.collocators
 				ul.list-group
@@ -16,4 +16,4 @@ block content
 				ul.nav.nav-pills.nav-stacked
 					each structure in structures
 						li(class=sid==structure.id_strukture ? 'active':'')
-							a(href='/entry?q=' + q + '&id=' + id + '&sid=' + structure.id_strukture)= structure.struktura
+							a(href='/entry?q=' + q + '&id=' + id + '&sid=' + structure.id_strukture)!= structure.struktura
