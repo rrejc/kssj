@@ -5,6 +5,7 @@ var app = express();
 var index = require('./controllers/index');
 var search = require('./controllers/search');
 var entry = require('./controllers/entry');
+var config = require('./config.js');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -19,4 +20,5 @@ var server = app.listen(3000, function() {
 	var port = server.address().port;
 	
 	console.log('Listening at http://%s:%s', host, port);
+	console.log('Connection string: ' + config.connectionString);
 });

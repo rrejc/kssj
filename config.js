@@ -1,5 +1,7 @@
+var process = require('process');
+
 var config = {
-	connectionString: 'postgres://kssj:123kssj321@localhost/kssj'
+	connectionString: process.env.PG_CONN
 }
 
 module.exports = config;
