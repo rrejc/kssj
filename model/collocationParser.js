@@ -26,6 +26,20 @@ var collocationParser = {
 		}		
 		saxParser.write('<dummy>' + collocation + '</dummy>').close();
 		return html;					
+	},
+	
+	toPlainText: function(collocation) {
+		var saxParser = sax.parser(true);
+		var plain = '';
+				
+		saxParser.ontext = function(t) {
+			var trimmed = t.trim();
+			if (trimmed !== '') {
+				plain = plain + t + ' ';
+			}
+		}
+		saxParser.write('<dummy>' + collocation + '</dummy>').close();
+		return plain.trim();
 	}			
 }
 

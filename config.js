@@ -1,6 +1,8 @@
 var config = {
 	connectionString: process.env.PG_CONN,
-    solrIndex: 'http://localhost:8080/solr/kssj/'    
+	solrServer: 'localhost',
+	solrPort: 8080,
+	solrPath: '/solr/kssj',
 }
 
 module.exports = config;

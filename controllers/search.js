@@ -3,6 +3,7 @@ var router = express.Router();
 var pgp = require('pg-promise')();
 var config = require('../config.js');
 var solrService = require('../services/solrService.js');
+var searchService = require('../services/searchService.js');
 
 router.get('/', function(req,res,next) {
 	var q = req.query.q;
@@ -22,9 +23,13 @@ router.get('/', function(req,res,next) {
 router.get('/autocomplete', function(req,res,next) {
     var q = req.query.q;
     
+	searchService.autocomplete(q, function(items) {
+		res.json(items);
+	});
+	/*
     solrService.getAutocompleteSuggestions(q, function(items) {
         res.json(items);        
-    });
+    });*/
 });
 
 module.exports = router;
