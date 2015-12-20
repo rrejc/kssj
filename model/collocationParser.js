@@ -13,7 +13,9 @@ var collocationParser = {
 				html = html + '<em>';
 			} else if (node.name === 'i') {
 				html = html + '<strong>';
-			}
+			} else if (node.name === 'v') {
+				html = html + ' / '
+			};
 		}
 		saxParser.onclosetag = function(tag) {
 			if (tag === 'k') {

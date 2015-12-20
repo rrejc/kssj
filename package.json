@@ -11,6 +11,7 @@
   "dependencies": {
     "express": "^4.13.3",
     "jade": "^1.11.0",
+    "node-uuid": "^1.4.7",
     "pg": "^4.4.3",
     "pg-promise": "^2.7.3",
     "sax": "^1.1.4",
