@@ -1,9 +1,9 @@
 .container-fluid
 	.search-bar
 		.input-form
-			form(method='get' action='/search')
+			form(method='get', action='/search')
 				.input-group
-					input(type='text', name='q' placeholder='Vnesi iskalni niz' value=q)
+					input(type='text', id='q', name='q', placeholder='Vnesi iskalni niz', value=q)
 					span.input-group-btn
 						button.btn.btn-primary(type='submit')
 							i(class='fa fa-search')

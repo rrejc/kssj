@@ -1,0 +1,1 @@
+var Kssj={run:function(){Kssj.bindSearch()},bindSearch:function(){var a=new Bloodhound({datumTokenizer:Bloodhound.tokenizers.obj.whitespace,queryTokenizer:Bloodhound.tokenizers.whitespace,remote:{url:"/search/autocomplete?q=%query",wildcard:"%query"}});$("#q").typeahead(null,{name:"autocomplete",source:a,displayKey:function(a){return a}})}};$(Kssj.run);
