@@ -1,23 +1,16 @@
 var express = require('express');
 var router = express.Router();
-var pgp = require('pg-promise')();
-var config = require('../config.js');
 var solrService = require('../services/solrService.js');
 var searchService = require('../services/searchService.js');
 
 router.get('/', function(req,res,next) {
 	var q = req.query.q;
+	var page = req.query.p || 1;
 	
-	var model = {
-		q: q
-	};
-	
-	var db = pgp(config.connectionString);
-	db.any("SELECT * FROM kssj_gesla WHERE iztocnica LIKE '%${iztocnica^}%'", {iztocnica:model.q})
-		.then(function(data) {
-			model.entries = data;
-			res.render('results', model);
-		});	
+	searchService.search(q, page, 20, function(results) {
+		results.q = q;
+		res.render('results', results);
+	});
 });
 
 router.get('/autocomplete', function(req,res,next) {
@@ -26,10 +19,6 @@ router.get('/autocomplete', function(req,res,next) {
 	searchService.autocomplete(q, function(items) {
 		res.json(items);
 	});
-	/*
-    solrService.getAutocompleteSuggestions(q, function(items) {
-        res.json(items);        
-    });*/
 });
 
 module.exports = router;

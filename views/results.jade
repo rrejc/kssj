@@ -4,10 +4,19 @@ block content
 	include ./partials/search-bar.jade
 	.container
 		h2 Rezultati iskanja
-		if (entries.length === 0)
+		if (headwords.length === 0 && collocations.length === 0)
 			p Vaše iskanje ni obrodilo sadov.
 		else
-			ul.list-group
-				each result in entries
-					li.list-group-item
-						a(href='/entry?id=' + result.id_gesla + '&q=' + q)= result.iztocnica
+			if (headwords.length > 0)
+				h3 Iztočnice
+				ul.list-group
+					each result in headwords
+						li.list-group-item
+							a(href='/entry?id=' + result.id_gesla + '&q=' + q)= result.iztocnica
+			if (collocations.length > 0)
+				h3 Kolokacije
+				ul.list-group
+					each result in collocations
+						li.list-group-item
+							a(href='/entry?id=' + result.id_gesla + '&q=' + q)!= result.kolokacija
+			

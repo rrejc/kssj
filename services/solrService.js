@@ -41,11 +41,9 @@ var solrService = {
 		var req = http.request(options, function(res) {
 			var body = '';
 			res.on('data', function(chunk) {
-				console.log('rsponse data');
 				body += chunk;
 			});
 			res.on('end', function() {
-					console.log('rsponse end');
 				var json = JSON.parse(body);
 				return callback(json);
 			})
