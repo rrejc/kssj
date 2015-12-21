@@ -5,12 +5,22 @@ var config = require('../config.js');
 var exampleParser = require('../model/exampleParser.js');
 var collocationParser = require('../model/collocationParser.js');
 var structureParser = require('../model/structureParser.js');
+var entryService = require('../services/entryService.js');
 
 router.get('/', function(req,res,next) {
 	var q = req.query.q;
 	var id = req.query.id;
 	var sid = req.query.sid;
 	
+	
+	entryService.getEntry(id,sid)
+	.then(function(data) {
+		data.q = q;
+		data.id = id
+		res.render('entry',data);
+	});
+	
+	/*
 	var model = {
 		q: q,
 		id: id
@@ -40,7 +50,7 @@ router.get('/', function(req,res,next) {
 				collocation.kolokacija = collocationParser.toHtml(collocation.kolokacija);
 			});
 			res.render('entry', model);
-		});
+		});*/
 });
 
 router.get('/collocation', function(req,res,next) {
