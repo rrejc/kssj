@@ -7,7 +7,7 @@ var solrService = require('../services/solrService.js');
 
 var db = pgp(config.connectionString);
 
-var qs = new QueryStream('SELECT * FROM kssj_gesla');
+var qs = new QueryStream('SELECT id_gesla, iztocnica FROM kssj_gesla');
 db.stream(qs, function(s) {
 	var documents = [];
 	s.on('data', function(data) {
@@ -19,13 +19,12 @@ db.stream(qs, function(s) {
 	})
 });
 
-var qs2 = new QueryStream('SELECT * FROM kssj_kolokacije');
+var qs2 = new QueryStream('SELECT id_kolokacije, id_gesla, kolokacija_text FROM kssj_kolokacije');
 db.stream(qs2, function(s) {
 	var collocationParser = require('../model/collocationParser.js');
 	var documents = [];
 	s.on('data', function(data) {
-		var collocation = collocationParser.toPlainText(data.kolokacija);
-		documents.push({id:uuid.v4(), entry_id:data.id_gesla, collocation_id: data.id_kolokacije, type:2, content:collocation})
+		documents.push({id:uuid.v4(), entry_id:data.id_gesla, collocation_id: data.id_kolokacije, type:2, content:data.kolokacija_text})
 		if (documents.length === 100){
 			solrService.addDocuments(documents);
 			documents = [];

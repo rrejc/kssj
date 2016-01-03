@@ -2,6 +2,7 @@ extends layout.jade
 
 block content
 	include ./partials/search-bar.jade
+	include ./mixins/collocations-mixins.jade
 	.container
 		.col-lg-12
 			h2= headword
@@ -10,8 +11,8 @@ block content
 			.collocators
 				ul.list-group
 					each collocation in collocations
-						li.list-group-item
-							a(href='/entry/collocation?q=' + q + '&id=' + id + '&cid=' + collocation.id_kolokacije)!= collocation.kolokacija
+						li.list-group-item 
+							+renderBatch(collocation, q)
 			.structures
 				ul.nav.nav-pills.nav-stacked
 					each structure in structures

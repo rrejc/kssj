@@ -1,46 +1,24 @@
-var sax = require('sax');
-
 var collocationParser = {	
 	toHtml: function(collocation) {
-		var saxParser = sax.parser(true);		
-		var html = '';
+		var obj = JSON.parse(collocation);
 		
-		saxParser.ontext = function(t) {
-			html = html + t;
-		}
-		saxParser.onopentag = function(node) {
-			if (node.name === 'k') {
-				html = html + '<em>';
-			} else if (node.name === 'i') {
-				html = html + '<strong>';
-			} else if (node.name === 'v') {
-				html = html + ' / '
-			};
-		}
-		saxParser.onclosetag = function(tag) {
-			if (tag === 'k') {
-				html = html + '</em>';
-			} else if (tag === 'i') {
-				html = html + '</strong>';
-			}			
-		}		
-		saxParser.write('<dummy>' + collocation + '</dummy>').close();
-		return html;					
-	},
-	
-	toPlainText: function(collocation) {
-		var saxParser = sax.parser(true);
-		var plain = '';
-				
-		saxParser.ontext = function(t) {
-			var trimmed = t.trim();
-			if (trimmed !== '') {
-				plain = plain + t + ' ';
+		var html = '';
+		for (var i = 0; i<obj.data.length; i++) {
+			if (html.length > 0) {
+				html = html + ' ';
+			}
+			
+			var item = obj.data[i];
+			if (item.name === 'i') {
+				html = html + '<strong>' + item.value + '</strong>';
+			} else if (item.name === 'k') {
+				html = html + '<em>' + item.value + '</em>';
+			} else {
+				html = html + item.value;
 			}
 		}
-		saxParser.write('<dummy>' + collocation + '</dummy>').close();
-		return plain.trim();
-	}			
+		return html.trim();					
+	}		
 }
 
 module.exports = collocationParser;

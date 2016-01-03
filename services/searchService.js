@@ -40,14 +40,23 @@ var searchService = {
 				wt: 'json'
 			}
 			solrService.select(qs, function(response) {
-				var result = {};			
+				console.log(response);
+				var result = {};
+				result.headwords = [];
+				result.collocations = [];			
 				
 				result.numFound = response.response.numFound;
+				result.page = page;
+				result.pageSize = pageSize;
 				
 				var headwords = [];
 				var collocations = [];
 				
 				var docs = response.response.docs;
+				if (docs.length === 0) {
+					resolve(result);
+				}
+				
 				for (var i=0;i<docs.length;i++) {
 					var doc = docs[i];
 					if (doc.type === 1) {
@@ -56,6 +65,7 @@ var searchService = {
 						collocations.push(doc.collocation_id);
 					}
 				}
+				
 
 				var db = pgp(config.connectionString);
 				db.any('SELECT id_gesla, iztocnica FROM kssj_gesla WHERE id_gesla IN ($1^)', pgp.as.csv(headwords))

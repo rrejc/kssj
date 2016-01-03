@@ -7,7 +7,7 @@ router.get('/', function(req,res,next) {
 	var q = req.query.q;
 	var page = req.query.p || 1;
 	
-	searchService.search(q, 1, 20)
+	searchService.search(q, page, 20)
 		.then(function(results) {
 			results.q = q;
 			res.render('results', results);			

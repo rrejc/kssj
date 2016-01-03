@@ -19,4 +19,7 @@ block content
 					each result in collocations
 						li.list-group-item
 							a(href='/entry?id=' + result.id_gesla + '&q=' + q)!= result.kolokacija
-			
+							
+			p Total results: #{numFound}
+			include ./mixins/pager-mixins.jade
+			+pager(page, pageSize, numFound, '/search?q=' + q)
