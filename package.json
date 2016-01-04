@@ -14,8 +14,7 @@
     "node-uuid": "^1.4.7",
     "pg": "^4.4.3",
     "pg-promise": "^2.7.3",
-    "sax": "^1.1.4",
-    "string": "^3.3.1"
+    "pg-query-stream": "^1.0.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
