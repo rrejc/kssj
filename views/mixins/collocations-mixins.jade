@@ -45,3 +45,28 @@ mixin renderBatch(collocations, q)
 		.pull-right
 			+renderHeadword(headword)
 	.clearfix
+	
+mixin renderResultCollocation(collocation, q)
+	- var json = JSON.parse(collocation.kolokacija);
+	a(href='/entry/collocation?q=' + q + '&cid=' + collocation.id_kolokacije)
+		each item in json.data
+			if (item.name === 'i')
+				strong= item.value
+			else if (item.name === 'k')
+				em= item.value
+			else
+				item.value
+			!=' '
+	a(href='/entry?q=' + q + '&id=' + collocation.id_gesla) !{'('}#{collocation.iztocnica}!{')'}
+
+mixin renderHtmlCollocation(collocation)
+	- var json = JSON.parse(collocation);
+	h2
+		each item in json.data
+			if (item.name === 'i')
+				strong= item.value
+			else if (item.name === 'k')
+				em= item.value
+			else
+				item.value
+			!=' '

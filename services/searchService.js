@@ -1,7 +1,6 @@
 var pgp = require('pg-promise')();
 var config = require('../config.js');
 var solrService = require('./solrService.js');
-var collocationParser = require('../model/collocationParser.js');
 
 var searchService = {	
 	// Autocomplete when searching
@@ -31,16 +30,14 @@ var searchService = {
 	
 	// Search
 	search: function(query, page, pageSize) {
-		return new Promise(function(resolve) {
-			
+		return new Promise(function(resolve, reject) {			
 			var qs = {
-				q: 'content:(' + query + ')',
+				q: '{!q.op=AND}content:(' + query + ')',
 				start: (page-1)*pageSize,
 				rows: pageSize,
 				wt: 'json'
 			}
 			solrService.select(qs, function(response) {
-				console.log(response);
 				var result = {};
 				result.headwords = [];
 				result.collocations = [];			
@@ -64,31 +61,28 @@ var searchService = {
 					} else if (doc.type === 2) {
 						collocations.push(doc.collocation_id);
 					}
-				}
+				}				
 				
-
 				var db = pgp(config.connectionString);
-				db.any('SELECT id_gesla, iztocnica FROM kssj_gesla WHERE id_gesla IN ($1^)', pgp.as.csv(headwords))
-				.then(function(data) {
-					result.headwords = data;
-					return db.any('SELECT g.id_gesla, g.iztocnica, k.id_kolokacije, k.kolokacija FROM kssj_kolokacije k, kssj_gesla g WHERE k.id_gesla = g.id_gesla AND k.id_kolokacije IN ($1^)', pgp.as.csv(collocations))
-				})
-				.then(function(data) {
-					result.collocations = data;
-					result.collocations.forEach(function(collocation) {
-						collocation.kolokacija = collocationParser.toHtml(collocation.kolokacija);
-					});
-					resolve(result);
-				})
-				.catch(function(err) {
-					throw err;
-				});;	
-			});			
-			
-		});
-		
 
-	},
+				// Entries
+				var sql1 = 'SELECT id_gesla, iztocnica FROM kssj_gesla WHERE id_gesla IN ($1^)';
+				var p1 = headwords.length > 0 ? db.any(sql1, pgp.as.csv(headwords)) : [];
+				
+				// Collocations
+				var sql2 = 'SELECT g.id_gesla, g.iztocnica, k.id_kolokacije, k.kolokacija FROM kssj_kolokacije k, kssj_gesla g WHERE k.id_gesla = g.id_gesla AND k.id_kolokacije IN ($1^)';
+				var p2 = collocations.length > 0 ? db.any(sql2, pgp.as.csv(collocations)) : [];
+				
+				Promise.all([p1,p2]).then(function(values) {
+					result.headwords = values[0];
+					result.collocations = values[1];
+					resolve(result);					
+				}, function(reason) {
+					reject(reason);
+				});				
+			});						
+		});
+	}
 }
 
 module.exports = searchService;

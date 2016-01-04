@@ -21,7 +21,6 @@ db.stream(qs, function(s) {
 
 var qs2 = new QueryStream('SELECT id_kolokacije, id_gesla, kolokacija_text FROM kssj_kolokacije');
 db.stream(qs2, function(s) {
-	var collocationParser = require('../model/collocationParser.js');
 	var documents = [];
 	s.on('data', function(data) {
 		documents.push({id:uuid.v4(), entry_id:data.id_gesla, collocation_id: data.id_kolokacije, type:2, content:data.kolokacija_text})

@@ -1,4 +1,5 @@
 extends layout.jade
+include ./mixins/collocations-mixins.jade
 
 block content
 	include ./partials/search-bar.jade
@@ -18,8 +19,8 @@ block content
 				ul.list-group
 					each result in collocations
 						li.list-group-item
-							a(href='/entry?id=' + result.id_gesla + '&q=' + q)!= result.kolokacija
+							+renderResultCollocation(result, q)
 							
-			p Total results: #{numFound}
+			p Število rezultatov: #{numFound}
 			include ./mixins/pager-mixins.jade
 			+pager(page, pageSize, numFound, '/search?q=' + q)
