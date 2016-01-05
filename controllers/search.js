@@ -4,6 +4,7 @@ var searchService = require('../services/searchService.js');
 
 router.get('/', function (req, res, next) {
 	var q = req.query.q;
+	
 	if (q) {
 		var page = req.query.p || 1;
 
