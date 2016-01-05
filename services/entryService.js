@@ -5,45 +5,45 @@ var solrService = require('./solrService.js');
 var entryService = {
 
 	getEntry: function (id, sid) {
-		return new Promise(function (resolve) {
-			var result = {};
+		return new Promise(function (resolve, reject) {
 			var db = pgp(config.connectionString);
-			
-			/*
+
 			var sql1 = 'SELECT g.*, b.bes_vrsta FROM kssj_gesla g, sssj_bes_vrste b WHERE g.id_bes_vrste = b.id_bes_vrste AND id_gesla = ${id}';
 			var p1 = db.one(sql1, { id: id });
-			
+
 			var sql2 = 'select id_strukture, vs.opis_html struktura from kssj_strukture s, kssj_vrste_strukture vs where s.id_vrste_strukture = vs.id_vrste_strukture and s.id_gesla= ${id}';
 			var p2 = db.many(sql2, { id: id });
-			*/
-			
-			 
-			
-			db.one('SELECT g.*, b.bes_vrsta FROM kssj_gesla g, sssj_bes_vrste b WHERE g.id_bes_vrste = b.id_bes_vrste AND id_gesla = ${id}', { id: id })
-				.then(function (data) {
-					result.headword = data.iztocnica;
-					result.pos = data.bes_vrsta;
-					return db.many('select id_strukture, vs.opis_html struktura from kssj_strukture s, kssj_vrste_strukture vs where s.id_vrste_strukture = vs.id_vrste_strukture and s.id_gesla= ${id}', { id: id });
-				})
-				.then(function (data) {
-					if (typeof sid === 'undefined') {
-						sid = data[0].id_strukture;
-					}
-					result.structures = data;
-					result.sid = sid;
-					return db.many('SELECT * FROM kssj_kolokacije WHERE id_strukture = ${sid}', { sid: sid });
-				})
-				.then(function (data) {
-					result.collocations = [];
-					while (data.length) {
-						var batch = data.splice(0, 4);
-						result.collocations.push(batch);
-					}
-					resolve(result);
-				})
-				.catch(function (err) {
-					throw err;
-				});;
+
+			if (typeof sid === 'undefined') {
+				var sql3 = 'SELECT * FROM kssj_kolokacije WHERE id_strukture = (SELECT id_strukture FROM kssj_strukture WHERE id_gesla = ${id} ORDER BY zap_st LIMIT 1)';
+				var p3 = db.many(sql3, { id: id });
+			} else {
+				var sql3 = 'SELECT * FROM kssj_kolokacije WHERE id_strukture = ${sid}';
+				var p3 = db.many(sql3, { sid: sid });
+			}
+
+			Promise.all([p1, p2, p3]).then(function (values) {
+				// Batch collocations
+				var collocations = [];
+				while (values[2].length) {
+					var batch = values[2].splice(0, 4);
+					collocations.push(batch);
+				}
+				
+				// Get real sid
+				var realSid = (typeof sid != 'undefined') ? sid : values[1][0].id_strukture;
+
+				var result = {
+					headword: values[0].iztocnica,
+					pos: values[0].bes_vrsta,
+					structures: values[1],
+					collocations: collocations,
+					sid: realSid
+				};
+				resolve(result);
+			}, function (reason) {
+				reject(reason);
+			});
 		});
 	},
 
