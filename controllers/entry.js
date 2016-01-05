@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var pgp = require('pg-promise')();
-var config = require('../config.js');
 var entryService = require('../services/entryService.js');
 
+// Entry
 router.get('/', function (req, res, next) {
 	var q = req.query.q;
 	var id = req.query.id;
@@ -14,9 +13,12 @@ router.get('/', function (req, res, next) {
 			data.q = q;
 			data.id = id;
 			res.render('entry', data);
+		}, function(reason) {
+			res.status(404).send('Geslo ne obstaja!');
 		});
 });
 
+// Collocation
 router.get('/collocation', function (req, res, next) {
 	var q = req.query.q;
 	var cid = req.query.cid;
@@ -25,6 +27,8 @@ router.get('/collocation', function (req, res, next) {
 		.then(function (data) {
 			data.q = q;
 			res.render('collocation', data);
+		}, function(reason) {
+			res.status(404).send('Kolokacija ne obstaja!');
 		});
 });
 

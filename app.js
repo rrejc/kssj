@@ -15,6 +15,11 @@ app.use('/', index);
 app.use('/search', search);
 app.use('/entry', entry);
 
+// 404
+app.use(function(req, res, next) {
+  res.status(404).send('Stran ne obstaja!');
+});
+
 var server = app.listen(3000, function() {
 	var host = server.address().address;
 	var port = server.address().port;

@@ -38,7 +38,7 @@ var searchService = {
 			result.page = page;
 			result.pageSize = pageSize;
 
-			if (typeof query == 'undefined' || query.trim() === '') {
+			if (!query) {
 				resolve(result);
 			} else {
 				var qs = {
