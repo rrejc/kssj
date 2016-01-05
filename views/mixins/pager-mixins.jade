@@ -9,11 +9,12 @@ mixin drawPage(currentPage, pageToDraw, baseLink)
 			a(href='#{baseLink}&p=#{pageToDraw}')= pageToDraw
 
 mixin pager(currentPage, pageSize, numFound, baseLink)
-	- var totalPages = Math.ceil(numFound / pageSize);
+	- var currentPage = parseInt(currentPage);
+	- var totalPages = Math.ceil(numFound / pageSize);	
 	- var hasPreviousPage = currentPage > 1;
 	- var hasNextPage = currentPage < totalPages; 
 	- var startPage = currentPage <= 10 ? 2 : currentPage - 9;
-	- var endPage = currentPage + 9 <= totalPages ? currentPage + 9 : totalPages; 
+	- var endPage = currentPage + 9 <= totalPages ? currentPage + 9 : totalPages;
 				
 	if (totalPages > 1)
 		ul.pagination
