@@ -18,7 +18,8 @@ var Kssj = {
 			displayKey: function(obj) {
 				return obj;
 			}
-		});		
+		});
+		//$('#q').focus();
     }
 }
 

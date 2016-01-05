@@ -30,6 +30,7 @@ mixin renderBatch(collocations, q)
 			}
 		}
 		
+		var collocation = collocations[0].kolokacija;
 		var isHeadwordLeft = collocation.data[0].name === 'i';
 		var headword = isHeadwordLeft ? collocation.data.splice(0, collocation.data.length-1) : collocation.data.splice(1, collocation.data.length-1);
 		
@@ -55,7 +56,7 @@ mixin renderResultCollocation(collocation, q)
 			else if (item.name === 'k')
 				em= item.value
 			else
-				item.value
+				= item.value
 			!=' '
 	a(href='/entry?q=' + q + '&id=' + collocation.id_gesla) !{'('}#{collocation.iztocnica}!{')'}
 
@@ -68,5 +69,5 @@ mixin renderHtmlCollocation(collocation)
 			else if (item.name === 'k')
 				em= item.value
 			else
-				item.value
+				= item.value
 			!=' '

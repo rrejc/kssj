@@ -31,56 +31,61 @@ var searchService = {
 	// Search
 	search: function (query, page, pageSize) {
 		return new Promise(function (resolve, reject) {
-			var qs = {
-				q: '{!q.op=AND}content:(' + query + ')',
-				start: (page - 1) * pageSize,
-				rows: pageSize,
-				wt: 'json'
-			}
-			solrService.select(qs, function (response) {
-				var result = {};
-				result.headwords = [];
-				result.collocations = [];
+			var result = {};
+			result.headwords = [];
+			result.collocations = [];
+			result.numFound = 0;
+			result.page = page;
+			result.pageSize = pageSize;
 
-				result.numFound = response.response.numFound;
-				result.page = page;
-				result.pageSize = pageSize;
-
-				var headwords = [];
-				var collocations = [];
-
-				var docs = response.response.docs;
-				if (docs.length === 0) {
-					resolve(result);
+			if (typeof query == 'undefined' || query.trim() === '') {
+				resolve(result);
+			} else {
+				var qs = {
+					q: '{!q.op=AND}content:(' + query + ')',
+					start: (page - 1) * pageSize,
+					rows: pageSize,
+					wt: 'json'
 				}
+				solrService.select(qs, function (response) {
+					result.numFound = response.response.numFound;
 
-				for (var i = 0; i < docs.length; i++) {
-					var doc = docs[i];
-					if (doc.type === 1) {
-						headwords.push(doc.entry_id);
-					} else if (doc.type === 2) {
-						collocations.push(doc.collocation_id);
+					var headwords = [];
+					var collocations = [];
+
+					var docs = response.response.docs;
+					if (docs.length === 0) {
+						resolve(result);
 					}
-				}
 
-				var db = pgp(config.connectionString);
+					for (var i = 0; i < docs.length; i++) {
+						var doc = docs[i];
+						if (doc.type === 1) {
+							headwords.push(doc.entry_id);
+						} else if (doc.type === 2) {
+							collocations.push(doc.collocation_id);
+						}
+					}
 
-				// Entries
-				var sql1 = 'SELECT id_gesla, iztocnica FROM kssj_gesla WHERE id_gesla IN ($1^)';
-				var p1 = headwords.length > 0 ? db.any(sql1, pgp.as.csv(headwords)) : [];
+					var db = pgp(config.connectionString);
+
+					// Entries
+					var sql1 = 'SELECT id_gesla, iztocnica FROM kssj_gesla WHERE id_gesla IN ($1^)';
+					var p1 = headwords.length > 0 ? db.any(sql1, pgp.as.csv(headwords)) : [];
 				
-				// Collocations
-				var sql2 = 'SELECT g.id_gesla, g.iztocnica, k.id_kolokacije, k.kolokacija FROM kssj_kolokacije k, kssj_gesla g WHERE k.id_gesla = g.id_gesla AND k.id_kolokacije IN ($1^)';
-				var p2 = collocations.length > 0 ? db.any(sql2, pgp.as.csv(collocations)) : [];
+					// Collocations
+					var sql2 = 'SELECT g.id_gesla, g.iztocnica, k.id_kolokacije, k.kolokacija FROM kssj_kolokacije k, kssj_gesla g WHERE k.id_gesla = g.id_gesla AND k.id_kolokacije IN ($1^)';
+					var p2 = collocations.length > 0 ? db.any(sql2, pgp.as.csv(collocations)) : [];
 
-				Promise.all([p1, p2]).then(function (values) {
-					result.headwords = values[0];
-					result.collocations = values[1];
-					resolve(result);
-				}, function (reason) {
-					reject(reason);
+					Promise.all([p1, p2]).then(function (values) {
+						result.headwords = values[0];
+						result.collocations = values[1];
+						resolve(result);
+					}, function (reason) {
+						reject(reason);
+					});
 				});
-			});
+			}
 		});
 	}
 }
