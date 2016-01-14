@@ -4,10 +4,12 @@ include ./mixins/collocations-mixins.jade
 block content
 	include ./partials/search-bar.jade
 	.container
-		h2 Rezultati iskanja
+		.page-header
+	
 		if (headwords.length === 0 && collocations.length === 0)
 			p Vaše iskanje ni obrodilo sadov.
 		else
+			p.text-muted Število rezultatov: #{numFound}
 			if (headwords.length > 0)
 				h3 Iztočnice
 				ul.list-group
@@ -21,6 +23,5 @@ block content
 						li.list-group-item
 							+renderResultCollocation(result, q)
 							
-			p Število rezultatov: #{numFound}
 			include ./mixins/pager-mixins.jade
 			+pager(page, pageSize, numFound, '/search?q=' + q)

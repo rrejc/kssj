@@ -39,26 +39,29 @@ mixin renderBatch(collocations, q)
 		.pull-left
 			+renderHeadword(headword)
 		.pull-right
-			+renderCollocators(collocators, q)
+			+renderCollocators(collocators, q, id)
 	else
 		.pull-left
-			+renderCollocators(collocators, q)
+			+renderCollocators(collocators, q, id)
 		.pull-right
 			+renderHeadword(headword)
 	.clearfix
 	
 mixin renderResultCollocation(collocation, q)
-	- var json = JSON.parse(collocation.kolokacija);
+	- var json = JSON.parse(collocation.kolokacija);	
+	!= '['
+	a(href='/entry?q=' + q + '&id=' + collocation.id_gesla) #{collocation.iztocnica}
+	!= ']'
+	a(href='/entry?q=' + q + '&id=' + collocation.id_gesla) 
 	a(href='/entry/collocation?q=' + q + '&cid=' + collocation.id_kolokacije)
 		each item in json.data
 			if (item.name === 'i')
 				strong= item.value
 			else if (item.name === 'k')
-				em= item.value
+				= item.value
 			else
 				= item.value
 			!=' '
-	a(href='/entry?q=' + q + '&id=' + collocation.id_gesla) !{'('}#{collocation.iztocnica}!{')'}
 
 mixin renderHtmlCollocation(collocation)
 	- var json = JSON.parse(collocation);

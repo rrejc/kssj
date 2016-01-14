@@ -4,9 +4,13 @@ include ./mixins/collocations-mixins.jade
 block content
 	include ./partials/search-bar.jade
 	.container
-		.col-lg-12
-			+renderHtmlCollocation(collocation)
-			h3!= structure
+			.page-header
+				h2 
+					a(href='/entry?id=' + id + '&q=' + q)= headword
+				h3= pos
+			.page-header		
+				+renderHtmlCollocation(collocation)
+				h3!= structure
 			ul
 				each example in examples
 					li!= example.zgled_html

@@ -6003,30 +6003,38 @@ h4 {
     .search-bar .input-form button {
       border-color: #ffffff; }
 
-.entry {
+/* Results */
+.results h3 {
+  color: #929292; }
+
+/* Entry */
+.entry h3 {
+  color: #929292; }
+
+.entry-wrapper {
   margin-left: -15px;
   margin-right: -15px; }
-  .entry:before, .entry:after {
+  .entry-wrapper:before, .entry-wrapper:after {
     content: " ";
     display: table; }
-  .entry:after {
+  .entry-wrapper:after {
     clear: both; }
-  .entry .collocators {
+  .entry-wrapper .collocators {
     position: relative;
     min-height: 1px;
     padding-left: 15px;
     padding-right: 15px; }
     @media (min-width: 1200px) {
-      .entry .collocators {
+      .entry-wrapper .collocators {
         float: left;
         width: 66.6666666667%; } }
-  .entry .structures {
+  .entry-wrapper .structures {
     position: relative;
     min-height: 1px;
     padding-left: 15px;
     padding-right: 15px; }
     @media (min-width: 1200px) {
-      .entry .structures {
+      .entry-wrapper .structures {
         float: left;
         width: 33.3333333333%; } }
 

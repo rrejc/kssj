@@ -9,9 +9,10 @@ router.get('/', function (req, res, next) {
 		var page = req.query.p || 1;
 
 		searchService.search(q, page, 20)
-			.then(function (results) {
-				results.q = q;
-				res.render('results', results);
+			.then(function (data) {
+				data.q = q;
+				data.bodyClass = 'results';
+				res.render('results', data);
 			});
 	} else {
 		// Redirect to index

@@ -133,7 +133,17 @@ h4 {
 	}
 }
 
-.entry {
+/* Results */
+.results h3 {
+	color: $kssj-gray3;
+}
+
+/* Entry */
+.entry h3 { 
+	color: $kssj-gray3;
+}
+
+.entry-wrapper {
 	@include make-row();
 	
 	.collocators {

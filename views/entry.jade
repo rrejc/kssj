@@ -4,10 +4,13 @@ block content
 	include ./partials/search-bar.jade
 	include ./mixins/collocations-mixins.jade
 	.container
-		.col-lg-12
+		.page-header
 			h2= headword
 			h3= pos
-		.entry
+		.page-header
+			h3 Izbrana struktura
+			h3!= structure.struktura	
+		.entry-wrapper
 			.collocators
 				ul.list-group
 					each collocation in collocations

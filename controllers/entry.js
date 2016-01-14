@@ -12,6 +12,7 @@ router.get('/', function (req, res, next) {
 		.then(function (data) {
 			data.q = q;
 			data.id = id;
+			data.bodyClass = 'entry';
 			res.render('entry', data);
 		}, function(reason) {
 			res.status(404).send('Geslo ne obstaja!');
@@ -26,6 +27,7 @@ router.get('/collocation', function (req, res, next) {
 	entryService.getCollocation(cid)
 		.then(function (data) {
 			data.q = q;
+			data.bodyClass = 'collocation';
 			res.render('collocation', data);
 		}, function(reason) {
 			res.status(404).send('Kolokacija ne obstaja!');
