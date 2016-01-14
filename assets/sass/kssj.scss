@@ -18,46 +18,25 @@ $kssj-blue4:					#072035;
 $kssj-font-family:				'Fira Sans', sans-serif;					
 
 // Fonts - md, sm, xs
-$kssj-font-size-base:			14px;
-$kssj-font-size-h1:				22.4px;
-$kssj-font-size-h2:				19.9px;
-$kssj-font-size-h3:				17.7px;
-$kssj-font-size-h4:				15.7px;
-
-$kssj-line-height-base:			24.5px;
-$kssj-line-height-h1:			39.2px;
-$kssj-line-height-h2:			34.8px;
-$kssj-line-height-h3:			30.9px;
-$kssj-line-height-h4:			27.5px;
-
-
-// Fonts - lg
-$kssj-font-size-base-desktop:	16px;
-$kssj-font-size-h1-desktop:		25.6px;
-$kssj-font-size-h2-desktop:		22.7px;
-$kssj-font-size-h3-desktop:		20.3px;
-$kssj-font-size-h4-desktop:		18.0px;
-
-$kssj-line-height-base-desktop:	28.0px;
-$kssj-line-height-h1-desktop:	44.8px;
-$kssj-line-height-h2-desktop:	39.7px;
-$kssj-line-height-h3-desktop:	35.5px;
-$kssj-line-height-h4-desktop:	31.5px;
 
 
 // --------------------------------------------------------------------------------
 // Bootstrap overrides
 // --------------------------------------------------------------------------------
-$brand-primary:					$kssj-blue2;
-$font-family-sans-serif:		$kssj-font-family;
-$font-family-serif:				$kssj-font-family;
-$font-family-base:				$kssj-font-family;
 
-$font-size-base:				$kssj-font-size-base;
-$font-size-h1:					$kssj-font-size-h1;
-$font-size-h2:					$kssj-font-size-h2;
-$font-size-h3:					$kssj-font-size-h3;
-$font-size-h4:					$kssj-font-size-h4;
+$text-color: 					#565656;
+$link-color:					#23a9f6;
+
+$brand-primary:					$kssj-blue2;
+$font-family-sans-serif:		'Fira Sans', sans-serif;
+$font-family-serif:				'Fira Sans', sans-serif;
+$font-family-base:				'Fira Sans', sans-serif;
+
+$font-size-base:				21.3333px;
+$font-size-h2:					31.0666px;
+$font-size-h3:					21.3333px;
+
+$headings-color:				#929292;
 
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "typeahead";
@@ -68,80 +47,131 @@ $font-size-h4:					$kssj-font-size-h4;
 // --------------------------------------------------------------------------------
 // Type
 body {
+	font-weight: 300;
 }
-h1 {
-	line-height: $kssj-line-height-h1;
-}
+
 h2 {
-	line-height: $kssj-line-height-h2;
+	font-weight: 500;
+	padding-left: 20px;
 }
+
 h3 {
-	line-height: $kssj-line-height-h3;
+	font-weight: 400;
+	padding-left: 20px;	
 }
-h4 {
-	line-height: $kssj-line-height-h4;
+strong {
+	font-weight: 500;
+}
+
+.headword {
+	font-weight: 500;
 }
 
 
-@media (min-width: $screen-lg-min) {
-	body {
-		font-size: $kssj-font-size-base-desktop;
-		line-height: $kssj-line-height-base-desktop;
-	}
-	h1 {
-		font-size: $kssj-font-size-h1-desktop;
-		line-height: $kssj-line-height-h1-desktop;
-	}
-	h2 {
-		font-size: $kssj-font-size-h2-desktop;
-		line-height: $kssj-line-height-h2-desktop;
-	}
-	h3 {
-		font-size: $kssj-font-size-h3-desktop;
-		line-height: $kssj-line-height-h3-desktop;
-	}
-	h4 {
-		font-size: $kssj-font-size-h4-desktop;
-		line-height: $kssj-line-height-h4-desktop;
-	}
-}
 
 // Search bar
 .search-bar {
 	@include make-row();	
 	background-color: $kssj-blue-base;
-	padding: 15px 0;
+	padding: 25px 0;
 	
 	.input-form {
-		@include make-sm-column(4);
-		@include make-sm-column-offset(4);
+		@include make-sm-column(6);
+		@include make-sm-column-offset(3);
+		@include make-md-column(4);
+		@include make-md-column-offset(4);
 		
 		input {
 			@extend .form-control;
 			background-color: $kssj-blue-base;
 			border-color: $kssj-white;
 			color: $kssj-white;
+			height: 50px;
 			
 			@include form-control-focus($kssj-white);
 			@include placeholder($kssj-gray2);
 		}
 		
 		button {
+			background-color: $kssj-blue-base;
 			border-color: $kssj-white;
 			$color: $kssj-white;
+			height: 50px;
+			padding-left: 18px;
+			padding-right: 18px;
 		}
 	}
 }
 
-/* Results */
-.results h3 {
-	color: $kssj-gray3;
+/* Results head */
+.results-head {
+	border-bottom: 1px solid #ddd;
+	padding: 61px 0 15px 0;
+	h3 {
+		margin: 0;
+	}
+}
+.hits-head {
+	padding: 15px 0 15px 0;
+	p {
+		color: #929292;
+		margin: 0;
+		padding-left: 20px;
+	}
 }
 
-/* Entry */
-.entry h3 { 
-	color: $kssj-gray3;
+// Entry head
+.entry-head {
+	border-bottom: 1px solid #ddd;
+	padding: 19px 0 15px 0;
+	margin: 0;
+		h2 {
+			color: #23a9f6;
+			line-height:1.3733;
+			margin: 0;
+		}
+		
+		h3 {
+			font-weight: 300;
+			margin: 0;
+		}		
 }
+
+
+// Structure head
+.structure-head {
+	padding: 15px 0 15px 0;
+	margin-bottom: 15px;
+	h3 {
+		line-height: 1.3733;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+}
+
+// Collocation-head
+.collocation-head {
+	border-bottom: 1px solid #ddd;
+	padding: 15px 0 15px 0px;
+	margin-bottom: 15px;
+	
+	h2 {
+		color: #565656;
+		font-weight: 300;
+		line-height:1.3733;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+	h3 {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+}
+
+.list-group > .list-group-item {
+	padding-left: 20px;
+}
+
 
 .entry-wrapper {
 	@include make-row();

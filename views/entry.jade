@@ -4,11 +4,11 @@ block content
 	include ./partials/search-bar.jade
 	include ./mixins/collocations-mixins.jade
 	.container
-		.page-header
+		.entry-head
 			h2= headword
 			h3= pos
-		.page-header
-			h3 Izbrana struktura
+		.structure-head
+			h3 Izbrana struktura:
 			h3!= structure.struktura	
 		.entry-wrapper
 			.collocators

@@ -4,20 +4,22 @@ include ./mixins/collocations-mixins.jade
 block content
 	include ./partials/search-bar.jade
 	.container
-		.page-header
+		.results-head
+			h3 Rezultati iskanja
 	
 		if (headwords.length === 0 && collocations.length === 0)
 			p Vaše iskanje ni obrodilo sadov.
 		else
-			p.text-muted Število rezultatov: #{numFound}
+			.hits-head
+				p.hits Število rezultatov: #{numFound}
 			if (headwords.length > 0)
-				h3 Iztočnice
+				h3 Iztočnice:
 				ul.list-group
 					each result in headwords
 						li.list-group-item
 							a(href='/entry?id=' + result.id_gesla + '&q=' + q)= result.iztocnica
 			if (collocations.length > 0)
-				h3 Kolokacije
+				h3 Kolokacije:
 				ul.list-group
 					each result in collocations
 						li.list-group-item

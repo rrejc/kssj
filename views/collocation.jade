@@ -4,11 +4,11 @@ include ./mixins/collocations-mixins.jade
 block content
 	include ./partials/search-bar.jade
 	.container
-			.page-header
+			.entry-head
 				h2 
 					a(href='/entry?id=' + id + '&q=' + q)= headword
 				h3= pos
-			.page-header		
+			.collocation-head		
 				+renderHtmlCollocation(collocation)
 				h3!= structure
 			ul
