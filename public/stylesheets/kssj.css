@@ -5950,6 +5950,9 @@ strong {
 .headword {
   font-weight: 500; }
 
+.index h3 {
+  padding-left: 0; }
+
 .search-bar {
   margin-left: -15px;
   margin-right: -15px;
