@@ -45,33 +45,16 @@ $headings-color:				#929292;
 // --------------------------------------------------------------------------------
 // KSSJ
 // --------------------------------------------------------------------------------
-// Type
+// Typography
 body {
 	font-weight: 300;
 }
-
-h2 {
-	font-weight: 500;
-	padding-left: 20px;
-}
-
-h3 {
+h1, h2, h3 {
 	font-weight: 400;
-	padding-left: 20px;	
 }
-strong {
+strong, .headword {
 	font-weight: 500;
 }
-
-.headword {
-	font-weight: 500;
-}
-
-
-.index h3 {
-	padding-left: 0;
-}
-
 
 // Search bar
 .search-bar {
@@ -107,70 +90,67 @@ strong {
 	}
 }
 
-/* Results head */
-.results-head {
+// Page headers
+.head {
 	border-bottom: 1px solid #ddd;
-	padding: 61px 0 15px 0;
-	h3 {
-		margin: 0;
-	}
-}
-.hits-head {
 	padding: 15px 0 15px 0;
-	p {
-		color: #929292;
-		margin: 0;
-		padding-left: 20px;
-	}
-}
-
-// Entry head
-.entry-head {
-	border-bottom: 1px solid #ddd;
-	padding: 19px 0 15px 0;
 	margin: 0;
+	h2, h3 {
+		padding: 0 0 0 20px;
+		margin: 0;
+		line-height: 1.3733;
+	}	
+	
+	&.results {
+		padding-top: 61px;
+	}
+	
+	&.entry {
+		padding-top: 19px;
 		h2 {
 			color: #23a9f6;
-			line-height:1.3733;
-			margin: 0;
+			font-weight: 500;
 		}
-		
 		h3 {
 			font-weight: 300;
-			margin: 0;
-		}		
-}
-
-
-// Structure head
-.structure-head {
-	padding: 15px 0 15px 0;
-	margin-bottom: 15px;
-	h3 {
-		line-height: 1.3733;
-		margin-top: 0;
-		margin-bottom: 0;
+		}
 	}
-}
-
-// Collocation-head
-.collocation-head {
-	border-bottom: 1px solid #ddd;
-	padding: 15px 0 15px 0px;
-	margin-bottom: 15px;
 	
-	h2 {
-		color: #565656;
-		font-weight: 300;
-		line-height:1.3733;
-		margin-top: 0;
-		margin-bottom: 0;
+	&.structure {
+		border: 0;	
 	}
-	h3 {
-		margin-top: 0;
-		margin-bottom: 0;
+
+	&.structure-menu {
+		border: 0;
+		padding-top: 43px;
+	}	
+	
+	&.collocation {
+		h2 {
+			color: #565656;
+			font-weight: 300;
+		}
+		h3 {
+			font-weight: 300;
+		}
 	}
 }
+
+// Results
+.results {
+	h3.group {
+		padding-left: 20px;
+		font-weight: 400;
+		color: #929292;
+	}
+	
+	p.hits {
+		color: #929292;
+		margin: 15px 0 15px 0;
+		padding: 0 0 0 20px;
+	}
+}
+
 
 .list-group > .list-group-item {
 	padding-left: 20px;
@@ -186,4 +166,8 @@ strong {
 	.structures {
 		@include make-lg-column(4);
 	}
+}
+
+.collocation ul.examples {
+	margin-top: 15px;
 }

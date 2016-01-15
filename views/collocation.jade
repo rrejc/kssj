@@ -4,13 +4,13 @@ include ./mixins/collocations-mixins.jade
 block content
 	include ./partials/search-bar.jade
 	.container
-			.entry-head
+			.head.entry
 				h2 
 					a(href='/entry?id=' + id + '&q=' + q)= headword
 				h3= pos
-			.collocation-head		
+			.head.collocation		
 				+renderHtmlCollocation(collocation)
 				h3!= structure
-			ul
+			ul.examples
 				each example in examples
 					li!= example.zgled_html
