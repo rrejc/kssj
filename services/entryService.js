@@ -24,17 +24,13 @@ var entryService = {
 
 			Promise.all([p1, p2, p3]).then(function (values) {
 				// Batch collocations
-				var collocations = [];
-				while (values[2].length) {
-					var batch = values[2].splice(0, 4);
-					collocations.push(batch);
-				}
+				var collocations = entryService.getBatches(values[2]);
 				
 				// Get real sid
 				var realSid = (typeof sid != 'undefined') ? sid : values[1][0].id_strukture;
 				
 				// Get real structure
-				var structure =  values[1].filter(function(s) {
+				var structure = values[1].filter(function (s) {
 					return s.id_strukture === realSid;
 				})[0];
 				console.log(structure);
@@ -52,6 +48,57 @@ var entryService = {
 				reject(reason);
 			});
 		});
+	},
+
+	getBatches: function (collocations) {
+		var batches = [];
+		
+		while (collocations.length) {
+			var newCollocations = [];
+			var batch = [];
+			
+			var first = collocations[0];
+			batch.push(first);
+			
+			if (collocations.length > 1) {
+				for (var i=1; i<collocations.length; i++) {
+					var temp = collocations[i];
+					if (entryService.compareCollocations(first, temp)) {
+						batch.push(temp);
+						if (batch.length === 4) {
+							var remaining = collocations.splice(i+1, collocations.length);
+							newCollocations = newCollocations.concat(remaining);
+							break;
+						}
+					} else {
+						newCollocations.push(temp);
+					}
+				}
+			}
+			batches.push(batch);
+			collocations = newCollocations;			
+		}
+		return batches;
+	},
+	
+	compareCollocations: function(first, second) {
+		var firstObj = JSON.parse(first.kolokacija).data;
+		var secondObj = JSON.parse(second.kolokacija).data;
+		
+		if (firstObj.length !== secondObj.length) {
+			return false;
+		}
+		
+		for (var i=0; i<firstObj.length; i++) {
+			if (firstObj[i].name !== secondObj[i].name) {
+				return false;
+			}
+			
+			if (firstObj[i].name !== 'k' && (firstObj[i].value !== secondObj[i].value)) {
+				return false;
+			}
+		}
+		return true;	
 	},
 
 	getCollocation: function (cid) {
