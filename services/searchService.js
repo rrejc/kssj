@@ -45,7 +45,8 @@ var searchService = {
 					q: '{!q.op=AND}content:(' + query + ')',
 					start: (page - 1) * pageSize,
 					rows: pageSize,
-					wt: 'json'
+					wt: 'json',
+					sort: 'type asc'
 				}
 				solrService.select(qs, function (response) {
 					result.numFound = response.response.numFound;

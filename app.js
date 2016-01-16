@@ -5,6 +5,7 @@ var app = express();
 var index = require('./controllers/index');
 var search = require('./controllers/search');
 var entry = require('./controllers/entry');
+var about = require('./controllers/about');
 var config = require('./config.js');
 
 app.set('views', path.join(__dirname, 'views'));
@@ -14,6 +15,7 @@ app.use(express.static('public'));
 app.use('/', index);
 app.use('/search', search);
 app.use('/entry', entry);
+app.use('/about', about);
 
 // 404
 app.use(function(req, res, next) {

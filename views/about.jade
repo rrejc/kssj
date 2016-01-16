@@ -1,0 +1,44 @@
+extends layout.jade
+
+block content
+	include ./partials/search-bar.jade
+	.container
+		.head.about
+			h2 Baza kolokacijskega slovarja slovenskega jezika v0.1 (BKSSJ v0.1)
+		h3 AVTORJI
+		ul.list-unstyled
+			li #[strong BKSSJ kot podatkovna zbirka]: Simon Krek, Iztok Kosem, Polona Gantar, Vojko Gorjanc, Cyprian Laskowski
+			li #[strong Spletni vmesnik BKSSJ]: Rok Rejc, Gašper Uršič, Simon Krek, Iztok Kosem, Polona Gantar, Vojko Gorjanc
+
+		p Izdelava Baze kolokacijskega slovarja slovenskega jezika poteka v okviru skupnega projekta :
+		ul
+			li #[a(href='http://www.cjvt.si/') Centra za jezikovne vire in tehnologije] Univerze v Ljubljani 
+			li Centra za uporabno jezikoslovje zavoda #[a(href='http://www.trojina.si/') Trojina] 
+			li raziskovalnega programa Slovenski jezik – bazične in kontrastivne raziskave Filozofske fakultete Univerze v Ljubljani
+		
+		p in sodelavcev s Fakultete za računalništvo in informatiko ter Naravoslovno-tehniške fakultete Univerze v Ljubljani.
+		
+		p Avtomatsko izdelana Baza kolokacijskega slovarja slovenskega jezika (v0.1) predstavlja prvo fazo projekta #[a(href='http://www.cjvt.si/kssj/') Kolokacijskega slovarja slovenskega jezika], ki je bil zasnovan na podlagi rezultatov projekta #[a(href='http://www.slovenscina.eu/') Sporazumevanje v slovenskem jeziku] (#[a(href='http://www.slovenscina.eu/spletni-slovar/leksikalna-baza') Leksikalna baza za slovenščino]). Baza vsebuje podatke, ki so bili strojno izluščeni iz korpusa #[a(href='http://www.gigafida.net/') Gigafida] s pomočjo za slovenščino prilagojenega statističnega orodja #[a(href='http://www.sketchengine.co.uk/') Sketch Engine]:
+		ul
+			li iztočnico (lema oz. osnovna oblika besede)
+			li besedno vrsto iztočnice (po tabeli oznak JOS)
+			li kolokacije (iz modula Besedne skice v orodju Sketch Engine)
+			li skladenjske strukture (na podlagi slovnice besednih skic v Besednih skicah)
+			li slovarske zglede (s pomočjo orodja GDEX v Besednih skicah).
+		
+		p V Kolokacijskem slovarju slovenskega jezika (KSSJ) bodo opisane najbolj pogoste in za slovenščino najbolj tipične besedne sopojavitve – t. i. kolokacije, ki odražajo naravno jezikovno rabo, kot je značilna za materne govorce slovenščine. V naslednji fazah želimo bazo nadgraditi z novimi gesli in izboljšati kakovost. V ta namen bodo kolokacije ročno pregledane in urejene glede na pogostnost in jezikovno relevantnost ter opisane s kratkimi pomenskimi indikatorji ter drugimi koristnimi slovarskimi podatki. Kolokacijski slovar slovenskega jezika predstavlja del jezikovnih podatkov, potrebnih za digitalno zasnovan opis slovenske leksike v #[a(href='http://www.cjvt.si/projekti/sssj/') Slovarju sodobnega slovenskega jezika].
+		
+		h3 Kaj vsebuje baza?
+		p V trenutni različici baze, ki vsebuje 2.500 iztočnic (samostalnikov, glagolov, pridevnikov in prislovov), 2.310.100 kolokacij in za vsako kolokacijo pet zgledov rabe, lahko uporabniki poiščejo zveze dveh besed v za slovenščino tipičnih slovničnih povezavah in si ogledajo njihovo življenje v realnih slovenskih besedilih. Kot tak je baza namenjena predvsem profesionalnim piscem, kot so prevajalci in novinarji, pisateljem ter učencem slovenščine kot tujega jezika oz. vsem, ki jih zanima naravna in tipična jezikovna raba ter obnašanje besed z vidika njihovega neposrednega besedilnega okolja.
+		
+		h3 Avtomatsko izluščeni podatki
+		p Ker je baza v prvi fazi izdelana povsem avtomatsko, je v njej mogoče najti tudi napake. Te se nanašajo na dva strojna mehanizma, uporabljena v procesu: 
+		
+		p 1. jezikoslovno označevanje korpusa Gigafida: celoten korpus je avtomatsko označen z označevalnikom #[a(href='http://www.slovenscina.eu/tehnologije/oznacevalnik') Obeliks], ki v povprečju deluje z 91,34-odstotno natančnostjo, pri nekaterih besedah oz. besednih vrstah bolje, pri drugih slabše. Osnovne oblike besed ali leme pripisuje s 97,88-odstotno natančnostjo. Te napake strojnega jezikoslovnega označevanja besedil in lematizacije se lahko prenašajo naprej v nadaljnje procese avtomatiziranja. Primer napačnega označevanja oz. lematizacije je kolokacija #[em kraj kolesa] v strukturi samostalnik#[sub 0] + samostalnik#[sub 2]. Besedna oblika #[em kraj] je bila v korpusu dovolj pogosto napačno označena kot samostalnik #[em kraj], ne pa kot oblika samostalnika #[em kraja], da je bila glede na statistiko sopojavljanja prepoznana kolokacija #[em kraj kolesa] namesto #[em kraja kolesa].
+		
+		p 2. strojno luščenje kolokacij v orodju Sketch Engine: orodje uporablja statistično analizo sopojavljanja besed v stavkih, pri čemer se v celoti opira na oznake in leme v jezikoslovno označenem korpusu. Primer napačne analize kolokacije pri procesu luščenja in nadaljnje obdelave kolokacij v BKSSJ je #[em bolezen očija] v strukturi samostalnik#[sub 0] + samostalnik#[sub 2]. Pri kolokatorju #[em oči] sta možni dve lemi: #[em oči] (eden od staršev) ali #[em oči] (množinski samostalnik – oko). Napačno je bila izbrana rodilniška oblika prve leme (#[em očija]) namesto rodilniške oblike druge leme (#[em oči] = bolezen oči). 
+		
+		p Ker lahko večino teh nepravilnosti uporabnik razreši že z vpogledom v korpusne zglede, je baza že v tej fazi uporabna za ugotavljanje tipične glagolske vezljivosti, pri izbiri različnih sinonimnih možnosti v kolokatorskem nizu in pri izbiri najustreznejše besedne kombinacije na sploh. Prav tako omogoča – prek vpogleda v korpusne zglede – prepoznavanje stalnih besednih zvez in frazeoloških enot, zlasti njihovo običajno kontekstualno rabo, npr. #[em ogenj železa] – #[em Prometni strokovnjaki pravijo, da še ni vse izgubljeno in da imajo »v ognju več želez«].
+		
+		h3 Prijazno povabilo
+		Pri našem nadaljnjem delu bodo zelo koristni vaši odzivi in konkretni predlogi, tako glede vsebine in manjkajočih podatkov kot tudi glede funkcionalnosti, iskalnih možnosti, prikazovanja podatkov ipd. Vaših pripomb, ki jih lahko pošljete na naslov #[a(href='mailto:kssj@cjvt.si') kssj@cjvt.si] bomo zato zelo veseli in jih bomo skušali upoštevati v čim večji meri. 

@@ -32,11 +32,9 @@ $font-family-sans-serif:		'Fira Sans', sans-serif;
 $font-family-serif:				'Fira Sans', sans-serif;
 $font-family-base:				'Fira Sans', sans-serif;
 
-//$font-size-base:				21.3333px;
-$font-size-base:				16pt;
-$font-size-h2:					31.0666px;
-//$font-size-h3:					21.3333px;
-$font-size-h3:					16pt;
+$font-size-base:				16px;
+$font-size-h2:					23.3px;
+$font-size-h3:					16px;
 
 $headings-color:				#929292;
 
@@ -60,19 +58,31 @@ strong, .headword {
 
 // Search bar
 .search-bar {
-	@include make-row();	
 	background-color: $kssj-blue-base;
 	padding: 25px 0;
-	
-	.input-form {
-		@include make-sm-column(6);
-		@include make-sm-column-offset(3);
-		@include make-md-column(4);
-		@include make-md-column-offset(4);
 		
+	a {
+		color: $kssj-white;
+		display: inline-block;
+		
+		&.home {
+			margin-top: 10px;
+		}	
+		
+		&.about {
+			margin-top: 10px;
+		}
+	}		
+			
+		.input-group {
+			
 		input {
 			@extend .form-control;
 			background-color: $kssj-blue-base;
+			background-image: url('../images/search.png');
+			background-position: 10px center;
+			background-repeat: no-repeat;
+			padding-left: 35px;
 			border-color: $kssj-white;
 			color: $kssj-white;
 			height: 50px;
@@ -88,8 +98,8 @@ strong, .headword {
 			height: 50px;
 			padding-left: 18px;
 			padding-right: 18px;
-		}
 	}
+		}
 }
 
 // Page headers
@@ -104,11 +114,11 @@ strong, .headword {
 	}	
 	
 	&.results {
-		padding-top: 61px;
+		padding-top: 63px;
 	}
 	
 	&.entry {
-		padding-top: 19px;
+		padding-top: 32px;
 		h2 {
 			color: #23a9f6;
 			font-weight: 500;
@@ -134,6 +144,13 @@ strong, .headword {
 		}
 		h3 {
 			font-weight: 300;
+		}
+	}
+	
+	&.about {
+		h2 {
+			padding-left: 0;
+			padding-top: 27px;
 		}
 	}
 }
