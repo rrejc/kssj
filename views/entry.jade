@@ -7,8 +7,8 @@ block content
 		.head.entry
 			h2= headword
 			h3= pos
-		.entry-wrapper
-			.collocators
+		.row
+			.col-md-8
 				.head.structure
 					h3 Izbrana struktura:
 					h3!= structure.struktura	
@@ -16,7 +16,7 @@ block content
 					each collocation in collocations
 						li.list-group-item 
 							+renderBatch(collocation, q)
-			.structures
+			.col-md-4
 				.head.structure-menu
 					h3 Strukture:
 				ul.nav.nav-pills.nav-stacked

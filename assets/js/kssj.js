@@ -19,7 +19,7 @@ var Kssj = {
 				return obj;
 			}
 		});
-		//$('#q').focus();
+		$('.index #q').select().focus();
     }
 }
 

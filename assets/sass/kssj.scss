@@ -1,33 +1,10 @@
 // --------------------------------------------------------------------------------
-// KSSJ variables
-// --------------------------------------------------------------------------------
-// Colors
-$kssj-white:					#ffffff;
-$kssj-gray1:					#f4f4f4;
-$kssj-gray2:					#e8e8e8;
-$kssj-gray3:					#929292;
-$kssj-black:					#212121;
-
-$kssj-blue-base:				#2196f3;
-$kssj-blue1:					#1e86d9;
-$kssj-blue2:					#186fb3;
-$kssj-blue3:					#104773;
-$kssj-blue4:					#072035;
-
-// Fonts - family
-$kssj-font-family:				'Fira Sans', sans-serif;					
-
-// Fonts - md, sm, xs
-
-
-// --------------------------------------------------------------------------------
 // Bootstrap overrides
 // --------------------------------------------------------------------------------
-
 $text-color: 					#565656;
 $link-color:					#23a9f6;
 
-$brand-primary:					$kssj-blue2;
+$brand-primary:					#23a9f6;
 $font-family-sans-serif:		'Fira Sans', sans-serif;
 $font-family-serif:				'Fira Sans', sans-serif;
 $font-family-base:				'Fira Sans', sans-serif;
@@ -40,7 +17,6 @@ $headings-color:				#929292;
 
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "typeahead";
-
 
 // --------------------------------------------------------------------------------
 // KSSJ
@@ -58,48 +34,40 @@ strong, .headword {
 
 // Search bar
 .search-bar {
-	background-color: $kssj-blue-base;
+	background-color: #2196f3;
 	padding: 25px 0;
 		
 	a {
-		color: $kssj-white;
+		color: #ffffff;
 		display: inline-block;
-		
-		&.home {
-			margin-top: 10px;
-		}	
-		
-		&.about {
-			margin-top: 10px;
-		}
+		margin-top: 15px;		
 	}		
 			
-		.input-group {
-			
+	.input-group {			
 		input {
 			@extend .form-control;
-			background-color: $kssj-blue-base;
+			background-color: #2196f3;
 			background-image: url('../images/search.png');
 			background-position: 10px center;
 			background-repeat: no-repeat;
 			padding-left: 35px;
-			border-color: $kssj-white;
-			color: $kssj-white;
+			border-color: #ffffff;
+			color: #ffffff;
 			height: 50px;
 			
-			@include form-control-focus($kssj-white);
-			@include placeholder($kssj-gray2);
+			@include form-control-focus(#ffffff);
+			@include placeholder(#e8e8e8);
 		}
 		
 		button {
-			background-color: $kssj-blue-base;
-			border-color: $kssj-white;
-			$color: $kssj-white;
+			background-color: #2196f3;
+			border-color: #ffffff;
+			$color: #ffffff;
 			height: 50px;
 			padding-left: 18px;
 			padding-right: 18px;
-	}
 		}
+	}
 }
 
 // Page headers
@@ -173,18 +141,6 @@ strong, .headword {
 
 .list-group > .list-group-item {
 	padding-left: 20px;
-}
-
-
-.entry-wrapper {
-	@include make-row();
-	
-	.collocators {
-		@include make-lg-column(8);
-	}
-	.structures {
-		@include make-lg-column(4);
-	}
 }
 
 .collocation ul.examples {
