@@ -33,7 +33,6 @@ var entryService = {
 				var structure = values[1].filter(function (s) {
 					return s.id_strukture === realSid;
 				})[0];
-				console.log(structure);
 
 				var result = {
 					headword: values[0].iztocnica,
@@ -123,7 +122,6 @@ var entryService = {
 				};
 				resolve(result);
 			}, function (reason) {
-				console.log(reason);
 				reject(reason);
 			});
 		});
