@@ -1,16 +1,15 @@
 var http = require('http');
 var querystring = require('querystring');
+var config = require('../config.js');
+var agent = http.Agent();
 
 var solrService = {
 	addDocuments: function (documents) {
-		var agent = http.Agent();
-
 		var json = JSON.stringify(documents);
-
 		var options = {
-			host: 'localhost',
-			port: 8080,
-			path: '/solr/kssj/update/json',
+			host: config.solrServer,
+			port: config.solrPort,
+			path: config.solrPath + '/update/json',
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -33,9 +32,9 @@ var solrService = {
 
 	select: function (qs, callback) {
 		var options = {
-			host: 'localhost',
-			port: 8080,
-			path: '/solr/kssj/select?' + querystring.stringify(qs),
+			host: config.solrServer,
+			port: config.solrPort,
+			path: config.solrPath + '/select?' + querystring.stringify(qs),
 			method: 'GET'
 		};
 		var req = http.request(options, function (res) {
@@ -46,7 +45,7 @@ var solrService = {
 			res.on('end', function () {
 				var json = JSON.parse(body);
 				return callback(json);
-			})
+			});
 		}).
 			on('error', function (e) {
 				console.log(e);
