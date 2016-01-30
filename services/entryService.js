@@ -11,14 +11,14 @@ var entryService = {
 			var sql1 = 'SELECT g.iztocnica, b.bes_vrsta FROM kssj_gesla g, sssj_bes_vrste b WHERE g.id_bes_vrste = b.id_bes_vrste AND id_gesla = ${id}';
 			var p1 = db.one(sql1, { id: id });
 
-			var sql2 = 'select id_strukture, vs.opis_html struktura from kssj_strukture s, kssj_vrste_strukture vs where s.id_vrste_strukture = vs.id_vrste_strukture and s.id_gesla= ${id}';
+			var sql2 = 'select id_strukture, vs.opis_html struktura from kssj_strukture s, kssj_vrste_strukture vs where s.id_vrste_strukture = vs.id_vrste_strukture and s.id_gesla= ${id} order by s.zap_st';
 			var p2 = db.many(sql2, { id: id });
 
 			if (typeof sid === 'undefined') {
-				var sql3 = 'SELECT * FROM kssj_kolokacije WHERE id_strukture = (SELECT id_strukture FROM kssj_strukture WHERE id_gesla = ${id} ORDER BY zap_st LIMIT 1)';
+				var sql3 = 'SELECT * FROM kssj_kolokacije WHERE id_strukture = (SELECT id_strukture FROM kssj_strukture WHERE id_gesla = ${id} ORDER BY zap_st LIMIT 1) order by zap_st';
 				var p3 = db.many(sql3, { id: id });
 			} else {
-				var sql3 = 'SELECT * FROM kssj_kolokacije WHERE id_strukture = ${sid}';
+				var sql3 = 'SELECT * FROM kssj_kolokacije WHERE id_strukture = ${sid} order by zap_st';
 				var p3 = db.many(sql3, { sid: sid });
 			}
 
@@ -108,7 +108,7 @@ var entryService = {
 			//var sql1 = 'SELECT k.*, vs.opis_html struktura FROM kssj_kolokacije k, kssj_strukture s, kssj_vrste_strukture vs WHERE k.id_strukture = s.id_strukture AND s.id_vrste_strukture = vs.id_vrste_strukture AND k.id_kolokacije = ${cid}';
 			var p1 = db.one(sql1, { cid: cid });
 
-			var sql2 = 'SELECT zgled_html FROM kssj_zgledi WHERE id_kolokacije = ${cid}';
+			var sql2 = 'SELECT zgled_html FROM kssj_zgledi WHERE id_kolokacije = ${cid} order by zap_st';
 			var p2 = db.many(sql2, { cid: cid });
 
 			Promise.all([p1, p2]).then(function (values) {
