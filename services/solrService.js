@@ -1,7 +1,9 @@
 var http = require('http');
 var querystring = require('querystring');
 var config = require('../config.js');
+
 var agent = http.Agent();
+agent.maxSockets = 5;
 
 var solrService = {
 	addDocuments: function (documents) {
