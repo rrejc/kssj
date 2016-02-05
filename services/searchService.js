@@ -54,7 +54,7 @@ var searchService = {
                     wt: 'json',
                     sort: 'type asc'
                 }
-                solrService.select(qs, function (err, response) {
+                solrService.select(qs, function (response) {
                     if (response.responseHeader.status !== 0) {
                         reject (response.error.code + ' - ' + response.error.msg);
                         return;

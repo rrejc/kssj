@@ -46,12 +46,11 @@ var solrService = {
             });
             res.on('end', function () {
                 var json = JSON.parse(body);
-                return callback(null, json);
+                return callback(json);
             });
         }).
             on('error', function (e) {
-                console.error(e);
-                callback(e);
+                console.error('Problem with request', e.message);
             });
         req.end();
     },
