@@ -12,6 +12,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(express.static('public'));
+app.use('/font-awesome', express.static('bower_components/font-awesome'));
+
 app.use('/', index);
 app.use('/search', search);
 app.use('/entry', entry);
