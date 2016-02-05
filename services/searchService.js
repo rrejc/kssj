@@ -48,7 +48,12 @@ var searchService = {
                     wt: 'json',
                     sort: 'type asc'
                 }
-                solrService.select(qs, function (response) {
+                solrService.select(qs, function (err, response) {
+                    if (response.responseHeader.status !== 200) {
+                        reject (response.error.code + ' - ' + response.error.msg);
+                        return;
+                    }
+                                        
                     result.numFound = response.response.numFound;
 
                     var headwords = [];

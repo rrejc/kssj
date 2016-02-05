@@ -5,7 +5,7 @@
 			"name": "Launch",
 			"type": "node",
 			"request": "launch",
-			"program": "app.js",
+			"program": "kssj.js",
 			"stopOnEntry": false,
 			"args": [],
 			"cwd": ".",
@@ -15,7 +15,7 @@
 			],
 			"env": {
 				"NODE_ENV": "development",
-				"PG_CONN": "postgres://ks:ks123@localhost/ks"				
+				"PG_CONN": "postgres://kssj:Cfs2EYATHa3Gh22CXO8E@localhost/kssj"				
 			},
 			"externalConsole": false,
 			"sourceMaps": false,

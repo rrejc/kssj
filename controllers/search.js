@@ -13,6 +13,9 @@ router.get('/', function (req, res, next) {
                 data.q = q;
                 data.bodyClass = 'results';
                 res.render('results', data);
+            }, function(reason) {
+                console.error(reason);
+                res.redirect('/');
             });
     } else {
         // Redirect to index

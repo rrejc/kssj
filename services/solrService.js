@@ -26,7 +26,7 @@ var solrService = {
             });
         });
         req.on('error', function (e) {
-            console.log('Problem with request', e.message);
+            console.error('Problem with request', e.message);
         });
         req.write(json);
         req.end();
@@ -46,11 +46,12 @@ var solrService = {
             });
             res.on('end', function () {
                 var json = JSON.parse(body);
-                return callback(json);
+                return callback(null, json);
             });
         }).
             on('error', function (e) {
-                console.log(e);
+                console.error(e);
+                callback(e);
             });
         req.end();
     },

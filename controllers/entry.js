@@ -15,6 +15,7 @@ router.get('/', function (req, res, next) {
             data.bodyClass = 'entry';
             res.render('entry', data);
         }, function(reason) {
+            console.error(reason);
             res.status(404).send('Geslo ne obstaja!');
         });
 });
@@ -30,6 +31,7 @@ router.get('/collocation', function (req, res, next) {
             data.bodyClass = 'collocation';
             res.render('collocation', data);
         }, function(reason) {
+            console.error(reason);
             res.status(404).send('Kolokacija ne obstaja!');
         });
 });
