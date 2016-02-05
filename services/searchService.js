@@ -4,27 +4,33 @@ var solrService = require('./solrService.js');
 
 var searchService = {    
     // Autocomplete when searching
-    autocomplete: function (query, callback) {
-        var qs = {
-            q: '*:*',
-            start: 0,
-            rows: 0,
-            facet: true,
-            'facet.field': 'autocomplete',
-            'facet.prefix': query,
-            'facet.sort': 'count',
-            'facet.limit': 10,
-            wt: 'json'
-        };
-        solrService.select(qs, function (response) {
-            var facets = response.facet_counts.facet_fields.autocomplete;
-            var items = [];
-            for (var i = 0; i < facets.length; i++) {
-                if (i % 2 == 0) {
-                    items.push(facets[i])
-                }
-            }
-            callback(items);
+    autocomplete: function (query) {
+        return new Promise(function(resolve, reject) {
+           if (!query) {
+               resolve([]);
+           } else {
+                var qs = {
+                    q: '*:*',
+                    start: 0,
+                    rows: 0,
+                    facet: true,
+                    'facet.field': 'autocomplete',
+                    'facet.prefix': query,
+                    'facet.sort': 'count',
+                    'facet.limit': 10,
+                    wt: 'json'
+                };
+                solrService.select(qs, function (response) {
+                    var facets = response.facet_counts.facet_fields.autocomplete;
+                    var items = [];
+                    for (var i = 0; i < facets.length; i++) {
+                        if (i % 2 == 0) {
+                            items.push(facets[i])
+                        }
+                    }
+                    resolve(items);
+                });               
+           }
         });
     },        
     

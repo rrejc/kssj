@@ -25,10 +25,18 @@ router.get('/', function (req, res, next) {
 
 router.get('/autocomplete', function (req, res, next) {
     var q = req.query.q;
-
-    searchService.autocomplete(q, function (items) {
-        res.json(items);
-    });
+    
+    if (q) {
+        searchService.autocomplete(q)
+            .then(function(data) {
+                res.json(data);
+            }, function(reason) {
+                console.error(reason);
+                res.json([]);
+            });
+    } else {
+        res.json([]);
+    }
 });
 
 module.exports = router;
