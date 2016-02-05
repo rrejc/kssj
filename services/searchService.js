@@ -49,7 +49,7 @@ var searchService = {
                     sort: 'type asc'
                 }
                 solrService.select(qs, function (err, response) {
-                    if (response.responseHeader.status !== 200) {
+                    if (response.responseHeader.status !== 0) {
                         reject (response.error.code + ' - ' + response.error.msg);
                         return;
                     }
