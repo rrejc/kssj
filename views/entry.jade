@@ -1,25 +1,25 @@
 extends layout.jade
 
 block content
-	include ./partials/search-bar.jade
-	include ./mixins/collocations-mixins.jade
-	.container
-		.head.entry
-			h2= headword
-			h3= pos
-		.row
-			.col-md-8
-				.head.structure
-					h3 Izbrana struktura:
-					h3!= structure.struktura	
-				ul.list-group
-					each collocation in collocations
-						li.list-group-item 
-							+renderBatch(collocation, q)
-			.col-md-4
-				.head.structure-menu
-					h3 Strukture:
-				ul.nav.nav-pills.nav-stacked
-					each structure in structures
-						li(class=sid==structure.id_strukture ? 'active':'')
-							a(href='/entry?q=' + q + '&id=' + id + '&sid=' + structure.id_strukture)!= structure.struktura
+    include ./partials/search-bar.jade
+    include ./mixins/collocations-mixins.jade
+    .container
+        .head.entry
+            h2= headword
+            h3= pos
+        .row
+            .col-md-8
+                .head.structure
+                    h3 Izbrana struktura:
+                    h3!= structure.struktura    
+                ul.list-group
+                    each collocation in collocations
+                        li.list-group-item 
+                            +renderBatch(collocation, q)
+            .col-md-4
+                .head.structure-menu
+                    h3 Strukture:
+                ul.nav.nav-pills.nav-stacked
+                    each structure in structures
+                        li(class=sid==structure.id_strukture ? 'active':'')
+                            a(href='/entry?q=' + q + '&id=' + id + '&sid=' + structure.id_strukture)!= structure.struktura

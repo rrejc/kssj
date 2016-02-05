@@ -2,27 +2,27 @@ extends layout.jade
 include ./mixins/collocations-mixins.jade
 
 block content
-	include ./partials/search-bar.jade
-	.container
-		.head.results
-			h3 Rezultati iskanja
-	
-		if (headwords.length === 0 && collocations.length === 0)
-			p.hits Vaše iskanje ni obrodilo sadov.
-		else
-			p.hits Število rezultatov: #{numFound}
-			if (headwords.length > 0)
-				h3.group Iztočnice:
-				ul.list-group
-					each result in headwords
-						li.list-group-item
-							a(href='/entry?id=' + result.id_gesla + '&q=' + q)= result.iztocnica
-			if (collocations.length > 0)
-				h3.group Kolokacije:
-				ul.list-group
-					each result in collocations
-						li.list-group-item
-							+renderResultCollocation(result, q)
-							
-			include ./mixins/pager-mixins.jade
-			+pager(page, pageSize, numFound, '/search?q=' + q)
+    include ./partials/search-bar.jade
+    .container
+        .head.results
+            h3 Rezultati iskanja
+    
+        if (headwords.length === 0 && collocations.length === 0)
+            p.hits Vaše iskanje ni obrodilo sadov.
+        else
+            p.hits Število rezultatov: #{numFound}
+            if (headwords.length > 0)
+                h3.group Iztočnice:
+                ul.list-group
+                    each result in headwords
+                        li.list-group-item
+                            a(href='/entry?id=' + result.id_gesla + '&q=' + q)= result.iztocnica
+            if (collocations.length > 0)
+                h3.group Kolokacije:
+                ul.list-group
+                    each result in collocations
+                        li.list-group-item
+                            +renderResultCollocation(result, q)
+                            
+            include ./mixins/pager-mixins.jade
+            +pager(page, pageSize, numFound, '/search?q=' + q)

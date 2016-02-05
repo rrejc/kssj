@@ -2,15 +2,15 @@ extends layout.jade
 include ./mixins/collocations-mixins.jade
 
 block content
-	include ./partials/search-bar.jade
-	.container
-		.head.entry
-			h2 
-				a(href='/entry?id=' + id + '&q=' + q)= headword
-			h3= pos
-		.head.collocation		
-			+renderHtmlCollocation(collocation)
-			h3!= structure
-		ul.examples
-			each example in examples
-				li!= example.zgled_html
+    include ./partials/search-bar.jade
+    .container
+        .head.entry
+            h2 
+                a(href='/entry?id=' + id + '&q=' + q)= headword
+            h3= pos
+        .head.collocation        
+            +renderHtmlCollocation(collocation)
+            h3!= structure
+        ul.examples
+            each example in examples
+                li!= example.zgled_html

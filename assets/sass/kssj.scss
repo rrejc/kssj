@@ -1,19 +1,19 @@
 // --------------------------------------------------------------------------------
 // Bootstrap overrides
 // --------------------------------------------------------------------------------
-$text-color: 					#565656;
-$link-color:					#23a9f6;
+$text-color:                #565656;
+$link-color:                #23a9f6;
 
-$brand-primary:					#23a9f6;
-$font-family-sans-serif:		'Fira Sans', sans-serif;
-$font-family-serif:				'Fira Sans', sans-serif;
-$font-family-base:				'Fira Sans', sans-serif;
+$brand-primary:             #23a9f6;
+$font-family-sans-serif:      'Fira Sans', sans-serif;
+$font-family-serif:           'Fira Sans', sans-serif;
+$font-family-base:            'Fira Sans', sans-serif;
 
-$font-size-base:				16px;
-$font-size-h2:					23.3px;
-$font-size-h3:					16px;
+$font-size-base:              16px;
+$font-size-h2:                23.3px;
+$font-size-h3:                16px;
 
-$headings-color:				#929292;
+$headings-color:            #929292;
 
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "typeahead";
@@ -23,126 +23,126 @@ $headings-color:				#929292;
 // --------------------------------------------------------------------------------
 // Typography
 body {
-	font-weight: 300;
+    font-weight: 300;
 }
 h1, h2, h3 {
-	font-weight: 400;
+    font-weight: 400;
 }
 strong, .headword {
-	font-weight: 500;
+    font-weight: 500;
 }
 
 // Search bar
 .search-bar {
-	background-color: #2196f3;
-	padding: 25px 0;
-		
-	a {
-		color: #ffffff;
-		display: inline-block;
-		margin-top: 15px;		
-	}		
-			
-	.input-group {			
-		input {
-			@extend .form-control;
-			background-color: #2196f3;
-			background-image: url('../images/search.png');
-			background-position: 10px center;
-			background-repeat: no-repeat;
-			padding-left: 35px;
-			border-color: #ffffff;
-			color: #ffffff;
-			height: 50px;
-			
-			@include form-control-focus(#ffffff);
-			@include placeholder(#e8e8e8);
-		}
-		
-		button {
-			background-color: #2196f3;
-			border-color: #ffffff;
-			$color: #ffffff;
-			height: 50px;
-			padding-left: 18px;
-			padding-right: 18px;
-		}
-	}
+    background-color: #2196f3;
+    padding: 25px 0;
+        
+    a {
+        color: #ffffff;
+        display: inline-block;
+        margin-top: 15px;        
+    }        
+            
+    .input-group {            
+        input {
+            @extend .form-control;
+            background-color: #2196f3;
+            background-image: url('../images/search.png');
+            background-position: 10px center;
+            background-repeat: no-repeat;
+            padding-left: 35px;
+            border-color: #ffffff;
+            color: #ffffff;
+            height: 50px;
+            
+            @include form-control-focus(#ffffff);
+            @include placeholder(#e8e8e8);
+        }
+        
+        button {
+            background-color: #2196f3;
+            border-color: #ffffff;
+            $color: #ffffff;
+            height: 50px;
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+    }
 }
 
 // Page headers
 .head {
-	border-bottom: 1px solid #ddd;
-	padding: 15px 0 15px 0;
-	margin: 0;
-	h2, h3 {
-		padding: 0 0 0 20px;
-		margin: 0;
-		line-height: 1.3733;
-	}	
-	
-	&.results {
-		padding-top: 63px;
-	}
-	
-	&.entry {
-		padding-top: 32px;
-		h2 {
-			color: #23a9f6;
-			font-weight: 500;
-		}
-		h3 {
-			font-weight: 300;
-		}
-	}
-	
-	&.structure {
-		border: 0;	
-	}
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0 15px 0;
+    margin: 0;
+    h2, h3 {
+        padding: 0 0 0 20px;
+        margin: 0;
+        line-height: 1.3733;
+    }    
+    
+    &.results {
+        padding-top: 63px;
+    }
+    
+    &.entry {
+        padding-top: 32px;
+        h2 {
+            color: #23a9f6;
+            font-weight: 500;
+        }
+        h3 {
+            font-weight: 300;
+        }
+    }
+    
+    &.structure {
+        border: 0;    
+    }
 
-	&.structure-menu {
-		border: 0;
-		padding-top: 36px;
-	}	
-	
-	&.collocation {
-		h2 {
-			color: #565656;
-			font-weight: 300;
-		}
-		h3 {
-			font-weight: 300;
-		}
-	}
-	
-	&.about {
-		h2 {
-			padding-left: 0;
-			padding-top: 27px;
-		}
-	}
+    &.structure-menu {
+        border: 0;
+        padding-top: 36px;
+    }    
+    
+    &.collocation {
+        h2 {
+            color: #565656;
+            font-weight: 300;
+        }
+        h3 {
+            font-weight: 300;
+        }
+    }
+    
+    &.about {
+        h2 {
+            padding-left: 0;
+            padding-top: 27px;
+        }
+    }
 }
 
 // Results
 .results {
-	h3.group {
-		padding-left: 20px;
-		font-weight: 400;
-		color: #929292;
-	}
-	
-	p.hits {
-		color: #929292;
-		margin: 15px 0 15px 0;
-		padding: 0 0 0 20px;
-	}
+    h3.group {
+        padding-left: 20px;
+        font-weight: 400;
+        color: #929292;
+    }
+    
+    p.hits {
+        color: #929292;
+        margin: 15px 0 15px 0;
+        padding: 0 0 0 20px;
+    }
 }
 
 
 .list-group > .list-group-item {
-	padding-left: 20px;
+    padding-left: 20px;
 }
 
 .collocation ul.examples {
-	margin-top: 15px;
+    margin-top: 15px;
 }

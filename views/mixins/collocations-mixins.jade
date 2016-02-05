@@ -1,76 +1,76 @@
 mixin renderHeadword(headword)
-	each val, index in headword
-		if (index > 0)
-			= ' '
-		span!= val.value
+    each val, index in headword
+        if (index > 0)
+            = ' '
+        span!= val.value
 
 mixin renderCollocators(collocators, q)
-	each val, index in collocators
-		if (index > 0)
-			= ' / '
-		a(href='/entry/collocation?q=' + q + '&cid=' + val.id)= val.collocator
-		
+    each val, index in collocators
+        if (index > 0)
+            = ' / '
+        a(href='/entry/collocation?q=' + q + '&cid=' + val.id)= val.collocator
+        
 mixin renderBatch(collocations, q)
-	-
-		// Translate all JSON strings into objects
-		for (var i=0; i<collocations.length; i++) {
-			collocations[i].kolokacija = JSON.parse(collocations[i].kolokacija);
-		}
-		
-		// Fill all collocators to array
-		var collocators = [];
-		for (var i=0; i<collocations.length; i++) {
-			var collocation = collocations[i].kolokacija;
-			var collocationId = collocations[i].id_kolokacije;
-			for (var j=0; j<collocation.data.length; j++) {
-				var data = collocation.data[j];
-				if (data.name === 'k') {
-					collocators.push({id: collocationId, collocator: data.value});
-				}
-			}
-		}
-		
-		var collocation = collocations[0].kolokacija;
-		var isHeadwordLeft = collocation.data[0].name === 'i';
-		var headword = isHeadwordLeft ? collocation.data.splice(0, collocation.data.length-1) : collocation.data.splice(1, collocation.data.length-1);
-		
-	// Render
-	if (isHeadwordLeft === true)
-		.pull-left
-			+renderHeadword(headword)
-		.pull-right
-			+renderCollocators(collocators, q, id)
-	else
-		.pull-left
-			+renderCollocators(collocators, q, id)
-		.pull-right
-			+renderHeadword(headword)
-	.clearfix
-	
+    -
+        // Translate all JSON strings into objects
+        for (var i=0; i<collocations.length; i++) {
+            collocations[i].kolokacija = JSON.parse(collocations[i].kolokacija);
+        }
+        
+        // Fill all collocators to array
+        var collocators = [];
+        for (var i=0; i<collocations.length; i++) {
+            var collocation = collocations[i].kolokacija;
+            var collocationId = collocations[i].id_kolokacije;
+            for (var j=0; j<collocation.data.length; j++) {
+                var data = collocation.data[j];
+                if (data.name === 'k') {
+                    collocators.push({id: collocationId, collocator: data.value});
+                }
+            }
+        }
+        
+        var collocation = collocations[0].kolokacija;
+        var isHeadwordLeft = collocation.data[0].name === 'i';
+        var headword = isHeadwordLeft ? collocation.data.splice(0, collocation.data.length-1) : collocation.data.splice(1, collocation.data.length-1);
+        
+    // Render
+    if (isHeadwordLeft === true)
+        .pull-left
+            +renderHeadword(headword)
+        .pull-right
+            +renderCollocators(collocators, q, id)
+    else
+        .pull-left
+            +renderCollocators(collocators, q, id)
+        .pull-right
+            +renderHeadword(headword)
+    .clearfix
+    
 mixin renderResultCollocation(collocation, q)
-	- var json = JSON.parse(collocation.kolokacija);	
-	!= '['
-	a(href='/entry?q=' + q + '&id=' + collocation.id_gesla, class='headword') #{collocation.iztocnica}
-	!= ']'
-	a(href='/entry?q=' + q + '&id=' + collocation.id_gesla) 
-	a(href='/entry/collocation?q=' + q + '&cid=' + collocation.id_kolokacije)
-		each item in json.data
-			if (item.name === 'i')
-				= item.value
-			else if (item.name === 'k')
-				= item.value
-			else
-				= item.value
-			!=' '
+    - var json = JSON.parse(collocation.kolokacija);    
+    != '['
+    a(href='/entry?q=' + q + '&id=' + collocation.id_gesla, class='headword') #{collocation.iztocnica}
+    != ']'
+    a(href='/entry?q=' + q + '&id=' + collocation.id_gesla) 
+    a(href='/entry/collocation?q=' + q + '&cid=' + collocation.id_kolokacije)
+        each item in json.data
+            if (item.name === 'i')
+                = item.value
+            else if (item.name === 'k')
+                = item.value
+            else
+                = item.value
+            !=' '
 
 mixin renderHtmlCollocation(collocation)
-	- var json = JSON.parse(collocation);
-	h2
-		each item in json.data
-			if (item.name === 'i')
-				= item.value
-			else if (item.name === 'k')
-				= item.value
-			else
-				= item.value
-			!=' '
+    - var json = JSON.parse(collocation);
+    h2
+        each item in json.data
+            if (item.name === 'i')
+                = item.value
+            else if (item.name === 'k')
+                = item.value
+            else
+                = item.value
+            !=' '

@@ -1,38 +1,38 @@
 mixin drawPage(currentPage, pageToDraw, baseLink)
-	- var x = 1;
-	
-	if pageToDraw == currentPage
-		li.active
-			span= pageToDraw
-	else
-		li
-			a(href='#{baseLink}&p=#{pageToDraw}')= pageToDraw
+    - var x = 1;
+    
+    if pageToDraw == currentPage
+        li.active
+            span= pageToDraw
+    else
+        li
+            a(href='#{baseLink}&p=#{pageToDraw}')= pageToDraw
 
 mixin pager(currentPage, pageSize, numFound, baseLink)
-	- var currentPage = parseInt(currentPage);
-	- var totalPages = Math.ceil(numFound / pageSize);	
-	- var hasPreviousPage = currentPage > 1;
-	- var hasNextPage = currentPage < totalPages; 
-	- var startPage = currentPage <= 10 ? 2 : currentPage - 9;
-	- var endPage = currentPage + 9 <= totalPages ? currentPage + 9 : totalPages;
-				
-	if (totalPages > 1)
-		ul.pagination
-			if (hasPreviousPage)
-				li
-					a(href='#') &laquo;
-			else
-				li.disabled
-					span &laquo;
-			
-			+drawPage(currentPage, 1, baseLink)
-			
-			-for (var i = startPage; i <= endPage; i++)
-				+drawPage(currentPage, i, baseLink)			
-					
-			if (hasNextPage)
-				li		
-					a(href='#') &raquo;
-			else
-				li.disabled
-					span &raquo;
+    - var currentPage = parseInt(currentPage);
+    - var totalPages = Math.ceil(numFound / pageSize);    
+    - var hasPreviousPage = currentPage > 1;
+    - var hasNextPage = currentPage < totalPages; 
+    - var startPage = currentPage <= 10 ? 2 : currentPage - 9;
+    - var endPage = currentPage + 9 <= totalPages ? currentPage + 9 : totalPages;
+                
+    if (totalPages > 1)
+        ul.pagination
+            if (hasPreviousPage)
+                li
+                    a(href='#') &laquo;
+            else
+                li.disabled
+                    span &laquo;
+            
+            +drawPage(currentPage, 1, baseLink)
+            
+            -for (var i = startPage; i <= endPage; i++)
+                +drawPage(currentPage, i, baseLink)            
+                    
+            if (hasNextPage)
+                li        
+                    a(href='#') &raquo;
+            else
+                li.disabled
+                    span &raquo;
